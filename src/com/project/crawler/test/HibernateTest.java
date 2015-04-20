@@ -28,5 +28,7 @@ public class HibernateTest {
         System.out.println("num of employess:" + resultList.size());
         resultList.forEach(System.out::println);
 
+        HibernateUtil.shutdown();
+
     }
 }
