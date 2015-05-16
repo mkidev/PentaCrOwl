@@ -40,7 +40,7 @@ public class Crawler {
         // DEBUG: print result
         System.out.println(result);
 
-        // TODO: write in database
+        // TODO: write in database, suck lennarts dick
     }
 
 }
