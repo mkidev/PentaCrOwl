@@ -11,6 +11,11 @@ import java.util.ArrayList;
  * Created by Daniel Steger on 06.09.15.
  */
 public class DataParserImpl implements DataParser {
+    DataCrawler crawler;
+
+    public DataParserImpl(DataCrawler crawler){
+        this.crawler = crawler;
+    }
 
     public User parseChannels(){
         return null;
@@ -21,8 +26,9 @@ public class DataParserImpl implements DataParser {
     }
 
     public ArrayList<Game> parseGames() {
+        String crawledGamesData = crawler.getGames();
 
-        JSONObject jsonGames = new JSONObject("");
+        JSONObject jsonGames = new JSONObject(crawledGamesData);
         JSONArray jsonArray = jsonGames.getJSONArray("top");
         ArrayList<Game> games = new ArrayList<Game>();
 
