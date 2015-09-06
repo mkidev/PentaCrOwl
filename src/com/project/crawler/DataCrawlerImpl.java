@@ -1,10 +1,15 @@
 package com.project.crawler;
 
+import com.project.model.Game;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by arash on 06.09.2015.
@@ -12,18 +17,22 @@ import java.net.URL;
 public class DataCrawlerImpl {
     String _streamerResults ="Fehler";
     String _channelResults ="Fehler";
-
+    DataParser parser;
 
     public static void main(String[] args) throws IOException {
         try {
-            new DataCrawlerImpl().getGames();
+            DataCrawlerImpl dc = new DataCrawlerImpl(new DataOperator());
+            dc.getStreams();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
+    public DataCrawlerImpl(DataOperator operator){
+         this.parser = operator.getDataParser();
 
+    }
     private String executeGet(String url) throws Exception {
         String result;
         URL obj = new URL(url);
@@ -61,16 +70,30 @@ public class DataCrawlerImpl {
 
         return result;
     }
-    public String getStreams(){
+    public List<String> getStreams(){
         String result="Fehler";
-        String GAMES_TOP_URL = "https://api.twitch.tv/kraken/games/top";
-        try {
-            result = executeGet(GAMES_TOP_URL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String streamsGeneral = "https://api.twitch.tv/kraken/streams?game=";
+        List<Game> games = new ArrayList<Game>();
+        List<String> gameStrings = new ArrayList<String>();
+        List<String> resultList = new ArrayList<String>();
 
-        return result;
+        /*games.forEach(System.out::println);
+        games.forEach(g-> System.out.println("g = " + g););*/
+
+
+
+           games.forEach(g-> {
+               gameStrings.add(g.getName());
+           });
+            gameStrings.forEach(gs-> {
+                try {
+                    resultList.add(executeGet(streamsGeneral + gs));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        resultList.forEach(System.out::println);
+        return resultList;
     }
 
 
