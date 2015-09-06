@@ -5,13 +5,23 @@ import com.project.model.Stream;
 import com.project.model.User;
 import org.json.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by Daniel Steger on 06.09.15.
  */
 public class DataParserImpl implements DataParser {
-    DataCrawler crawler;
+    private DataCrawler crawler;
+
+    public static void main(String[] args) throws IOException {
+        try {
+            new DataParserImpl()
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     public DataParserImpl(DataCrawler crawler){
         this.crawler = crawler;
@@ -38,7 +48,6 @@ public class DataParserImpl implements DataParser {
 
             games.add(new Game(name, viewers));
         }
-
 
         return games;
     }
