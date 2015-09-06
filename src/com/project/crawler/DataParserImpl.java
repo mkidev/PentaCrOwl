@@ -14,14 +14,6 @@ import java.util.ArrayList;
 public class DataParserImpl implements DataParser {
     private DataCrawler crawler;
 
-    public static void main(String[] args) throws IOException {
-        try {
-            new DataParserImpl()
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 
     public DataParserImpl(DataCrawler crawler){
         this.crawler = crawler;
