@@ -21,6 +21,6 @@ public class DataParserImplTest {
 
     @Test
     public void testParseGames() throws Exception {
-
+        DataParserImpl parser;
     }
 }

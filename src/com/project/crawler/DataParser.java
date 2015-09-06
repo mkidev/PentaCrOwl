@@ -11,6 +11,6 @@ import java.util.ArrayList;
  */
 public interface DataParser {
     User parseChannels();
-    Stream parseStreams();
+    ArrayList<Stream> parseStreams();
     ArrayList<Game> parseGames();
 }
