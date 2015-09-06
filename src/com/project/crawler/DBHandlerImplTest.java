@@ -34,7 +34,7 @@ public class DBHandlerImplTest {
     @Before
     public void setUp() throws Exception {
         testGame = new Game("LOL", 9999);
-        dbh = new DBHandlerImpl(HibernateUtil.getEntityManagerFactory().createEntityManager());
+        dbh = new DBHandlerImpl(HibernateUtil.getSessionFactory().openSession());
     }
 
     @After
