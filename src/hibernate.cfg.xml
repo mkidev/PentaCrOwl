@@ -21,7 +21,7 @@
         <property name="connection.pool_size">1</property>
         <property name="current_session_context_class">thread</property>
 
-        <mapping class="com.project.model.Person" />
+        <mapping class="com.project.model.User" />
         <mapping class="com.project.model.Stream" />
     </session-factory>
 </hibernate-configuration>
