@@ -8,6 +8,6 @@ import java.util.List;
 public interface DataCrawler {
 
     String getChannels();
-    List<String> getStreams();
+    String getStreams(String game);
     String getGames();
 }

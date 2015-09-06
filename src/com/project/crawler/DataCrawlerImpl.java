@@ -19,15 +19,7 @@ public class DataCrawlerImpl implements DataCrawler {
     String _channelResults ="Fehler";
     DataParser parser;
 
-    public static void main(String[] args) throws IOException {
-        try {
-            DataCrawlerImpl dc = new DataCrawlerImpl(new DataOperator());
-            dc.getStreams();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+
 
     public DataCrawlerImpl(DataOperator operator){
          this.parser = operator.getDataParser();
@@ -76,32 +68,17 @@ public class DataCrawlerImpl implements DataCrawler {
         return null;
     }
 
-    public List<String> getStreams(){
+    public String getStreams(String game){
         String result="Fehler";
         String streamsGeneral = "https://api.twitch.tv/kraken/streams?game=";
-
-        List<Game> games = new ArrayList<Game>();
-        games = parser.parseGames();
-        List<String> gameStrings = new ArrayList<String>();
-        List<String> resultList = new ArrayList<String>();
-
-        /*games.forEach(System.out::println);
-        games.forEach(g-> System.out.println("g = " + g););*/
+        try {
+            result = executeGet(streamsGeneral + game);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-
-           games.forEach(g-> {
-               gameStrings.add(g.getName());
-           });
-            gameStrings.forEach(gs-> {
-                try {
-                    resultList.add(executeGet(streamsGeneral + gs));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        resultList.forEach(System.out::println);
-        return resultList;
+        return result;
     }
 
 
