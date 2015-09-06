@@ -1,22 +1,18 @@
 package com.project.crawler.util;
 
 import org.hibernate.SessionFactory;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Created by marcel on 15.04.2015.
  */
 public class HibernateUtil {
-    @PersistenceUnit
-    private static final EntityManagerFactory emf = buildEntityManagerFactory();
+    private static final SessionFactory sessionFactory = buildSessionFactory();
 
-    private static EntityManagerFactory buildEntityManagerFactory() {
+    private static SessionFactory buildSessionFactory() {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
-            return Persistence.createEntityManagerFactory("");
+            return new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
@@ -24,12 +20,12 @@ public class HibernateUtil {
         }
     }
 
-    public static EntityManagerFactory getEntityManagerFactory() {
-        return emf;
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
     public static void shutdown() {
         // Close caches and connection pools
-        getEntityManagerFactory().close();
+        getSessionFactory().close();
     }
 }
