@@ -23,5 +23,7 @@
 
         <mapping class="com.project.model.User" />
         <mapping class="com.project.model.Stream" />
+        <mapping class="com.project.model.Game" />
+
     </session-factory>
 </hibernate-configuration>

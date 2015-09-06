@@ -5,6 +5,7 @@ import com.project.crawler.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 public class HibernateTest {
     public static void main(String[] args) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        EntityManager session = HibernateUtil.getEntityManagerFactory().createEntityManager();
 
         session.beginTransaction();
 

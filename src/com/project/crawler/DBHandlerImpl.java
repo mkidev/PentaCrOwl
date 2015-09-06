@@ -2,37 +2,33 @@ package com.project.crawler;
 
 import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
+
 /**
  * Created by Marcel Kisilowski on 06.09.15.
  */
 public class DBHandlerImpl implements DBHandler {
-    private Session session;
+    private EntityManager entityManager;
 
-    public DBHandlerImpl(Session session) {
-        this.session = session;
+    public DBHandlerImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
     public Object save(Object object) {
-        session.beginTransaction();
-        session.save(object);
-        session.getTransaction().commit();
+        entityManager.persist(object);
         return object;
     }
 
     @Override
     public Object update(Object object) {
-        session.beginTransaction();
-        session.update(object);
-        session.getTransaction().commit();
+        entityManager.refresh(object);
         return object;
     }
 
     @Override
     public boolean delete(Object object) {
-        session.beginTransaction();
-        session.delete(object);
-        session.getTransaction().commit();
+        entityManager.remove(object);
         return true;
     }
 }
