@@ -1,6 +1,7 @@
 package com.project.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ public class Game {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment" , strategy = "increment")
     private int gameID;
+    @NaturalId
     private final String name;
     private final int viewers;
 

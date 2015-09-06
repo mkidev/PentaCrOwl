@@ -2,10 +2,10 @@ package com.project.test;
 
 import com.project.model.User;
 import com.project.crawler.util.HibernateUtil;
-import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -16,16 +16,14 @@ public class HibernateTest {
 
         EntityManager session = HibernateUtil.getEntityManagerFactory().createEntityManager();
 
-        session.beginTransaction();
-
         User person = new User("Marcel");
-        session.save(person);
+        session.persist(person);
 
         session.getTransaction().commit();
 
         Query q = session.createQuery("From Person ");
 
-        List<User> resultList = q.list();
+        List<User> resultList = q.getResultList();
         System.out.println("num of employess:" + resultList.size());
         resultList.forEach(System.out::println);
 
