@@ -11,7 +11,7 @@ import java.util.List;
  * Created by marcel on 15.04.2015.
  */
 public class HibernateTest {
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -30,5 +30,5 @@ public class HibernateTest {
 
         HibernateUtil.shutdown();
 
-    }
+    }*/
 }

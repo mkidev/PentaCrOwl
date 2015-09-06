@@ -10,7 +10,11 @@ import static org.junit.Assert.*;
 public class DataCrawlerImplTest {
 
     @Test
-    public void testGetGames() throws Exception {
+    public void testGetStreams() throws Exception {
+        DataOperator o = new DataOperator();
+        DataCrawlerImpl dc = new DataCrawlerImpl(o);
+
+
 
     }
 }

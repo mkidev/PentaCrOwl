@@ -14,4 +14,10 @@ public class DataOperator {
     public DataCrawler getDataCrawler() {
         return dataCrawler;
     }
+
+    public DataOperator() {
+        dataCrawler = new DataCrawlerImpl(this);
+        dataParser = new DataParserImpl(this);
+    }
+
 }
