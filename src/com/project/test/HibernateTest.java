@@ -1,6 +1,6 @@
-package com.project.crawler.test;
+package com.project.test;
 
-import com.project.crawler.model.Person;
+import com.project.model.Person;
 import com.project.crawler.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
