@@ -4,9 +4,9 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://178.62.106.81:3306/hsp</property>
-        <property name="connection.username">hspuser</property>
-        <property name="connection.password">qwertz12345</property>
+        <property name="connection.url">jdbc:mysql://192.168.2.2:3306/hsp</property>
+        <property name="connection.username">marcel</property>
+        <property name="connection.password">1234</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
