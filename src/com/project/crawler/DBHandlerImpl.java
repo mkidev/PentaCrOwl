@@ -1,4 +1,4 @@
-package com.project.com.project.crawler;
+package com.project.crawler;
 
 import org.hibernate.Session;
 

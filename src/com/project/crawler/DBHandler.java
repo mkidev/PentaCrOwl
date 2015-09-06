@@ -1,4 +1,4 @@
-package com.project.com.project.crawler;
+package com.project.crawler;
 
 /**
  * Created by Marcel Kisilowski on 06.09.15.
