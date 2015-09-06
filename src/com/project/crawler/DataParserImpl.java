@@ -8,6 +8,7 @@ import org.json.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Daniel Steger on 06.09.15.
@@ -23,8 +24,8 @@ public class DataParserImpl implements DataParser {
         return null;
     }
 
-    public ArrayList<Stream> parseStreams() {
-        String crawledStreamsData = crawler.getStreams();
+    public ArrayList<Stream> parseStreams(String game) {
+        String crawledStreamsData = crawler.getStreams(game);
 
         JSONObject jsonGames = new JSONObject(crawledStreamsData);
         JSONArray jsonArray = jsonGames.getJSONArray("streams");
@@ -32,8 +33,7 @@ public class DataParserImpl implements DataParser {
 
         for (int i = 0; i < jsonArray.length(); i++) {
             //String source = jsonArray.getJSONObject(i).getJSONObject(links);
-            String channel = jsonArray.getJSONObject(i).getJSONObject("game").getString("name");
-            String game = null;
+            //String channel = jsonArray.getJSONObject(i).getJSONObject("game").getString("name");
             Date createdAt = null;
             String previewPicture = null;
 
