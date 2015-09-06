@@ -1,6 +1,6 @@
 package com.project.test;
 
-import com.project.model.Person;
+import com.project.model.User;
 import com.project.crawler.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -17,14 +17,14 @@ public class HibernateTest {
 
         session.beginTransaction();
 
-        Person person = new Person("Marcel");
+        User person = new User("Marcel");
         session.save(person);
 
         session.getTransaction().commit();
 
         Query q = session.createQuery("From Person ");
 
-        List<Person> resultList = q.list();
+        List<User> resultList = q.list();
         System.out.println("num of employess:" + resultList.size());
         resultList.forEach(System.out::println);
 
