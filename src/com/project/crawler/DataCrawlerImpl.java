@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class DataCrawlerImpl implements DataCrawler {
 
         // optional default is GET
         con.setRequestMethod("GET");
+
         System.out.println("url = " + url);
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL : " + url);
@@ -81,7 +83,7 @@ public class DataCrawlerImpl implements DataCrawler {
         String result="Fehler";
         String streamsGeneral = "https://api.twitch.tv/kraken/streams?game=";
         try {
-            result = executeGet(streamsGeneral + game);
+            result = executeGet(streamsGeneral + URLEncoder.encode(game));
         } catch (Exception e) {
             e.printStackTrace();
         }
