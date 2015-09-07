@@ -70,7 +70,7 @@ public class DataCrawlerImpl implements DataCrawler {
         String channelsGeneral = "https://api.twitch.tv/kraken/search/channels?q=";
 
         try {
-            result = executeGet(channelsGeneral + game);
+            result = executeGet(channelsGeneral + URLEncoder.encode(game));
         } catch (Exception e) {
             e.printStackTrace();
         }

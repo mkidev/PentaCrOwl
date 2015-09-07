@@ -24,13 +24,13 @@ public class DataParserImpl implements DataParser {
 
     public ArrayList<Channel> parseChannels(String game,String crawledChannelsData){
         JSONObject jsonChannel = new JSONObject(crawledChannelsData);
-        JSONArray jsonArray = jsonChannel.getJSONArray("channel");
+        JSONArray jsonArray = jsonChannel.getJSONArray("channels");
         ArrayList<Channel> channels = new ArrayList<Channel>();
 
         for (int i = 0; i < jsonArray.length(); i++) {
             String name = jsonArray.getJSONObject(i).getString("name");
             int views = jsonArray.getJSONObject(i).getInt("views");
-            int follower = jsonArray.getJSONObject(i).getInt("follower");
+            int follower = jsonArray.getJSONObject(i).getInt("followers");
             String link = jsonArray.getJSONObject(i).getString("url");
 
             // ein weiterer HTTP-Request mit anschließender Verarbeitung wird benötigt
