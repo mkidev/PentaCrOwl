@@ -50,7 +50,7 @@ public class DataParserImpl implements DataParser {
 
         for (int i = 0; i < jsonArray.length(); i++) {
             String source = jsonArray.getJSONObject(i).getJSONObject("_links").getString("self");
-            String channel = jsonArray.getJSONObject(i).getString("channel");
+            String channel = jsonArray.getJSONObject(i).getJSONObject("channel").getString("name");
 
             //Greenwich time
             String createdAtString = jsonArray.getJSONObject(i).getString("created_at");
