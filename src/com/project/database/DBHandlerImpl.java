@@ -1,9 +1,11 @@
 package com.project.database;
 
+import com.project.crawler.util.HibernateUtil;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
@@ -14,10 +16,17 @@ import java.io.Serializable;
  */
 public class DBHandlerImpl implements DBHandler {
     private Session session;
+    private SessionFactory sessionFactory;
     private Transaction transaction;
 
-    public DBHandlerImpl(Session session) {
-        this.session = session;
+    public DBHandlerImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public void startSession() {
+        session = sessionFactory.openSession();
+    }
+    public void startTransaction() {
         transaction = session.beginTransaction();
     }
 
@@ -65,9 +74,12 @@ public class DBHandlerImpl implements DBHandler {
         session.delete(object);
     }
 
-    @Override
-    public void close(){
+    public void commit(){
         transaction.commit();
+    }
+
+    @Override
+    public void closeSession(){
         session.close();
     }
 
@@ -98,6 +110,11 @@ public class DBHandlerImpl implements DBHandler {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public void close() {
+        sessionFactory.close();
     }
 
 

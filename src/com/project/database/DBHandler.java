@@ -13,13 +13,17 @@ public interface DBHandler {
     Object save(Object object);
     Object update(Object object);
     void delete(Object object);
-    void close();
+    void closeSession();
     boolean checkExists(Object object);
+    void close();
 
     <T> Object get(Class<T> gameClass, Serializable aLong);
     Game getGameByName(String name);
     Stream getStreamByName(String name);
     Channel getChannelByName(String name);
+    void startSession();
 
+    void commit();
+    void startTransaction();
     Object saveOrUpdate(Object object);
 }

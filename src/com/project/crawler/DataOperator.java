@@ -34,13 +34,25 @@ public class DataOperator {
     public DataOperator() {
         dataCrawler = new DataCrawlerImpl();
         dataParser = new DataParserImpl(dataCrawler);
-        dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory().openSession());
+        dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory());
     }
     public static void main(String[] args){
         DataOperator dataOperator = new DataOperator();
+        dbHandler.startSession();
+        dbHandler.startTransaction();
         dataOperator.saveGames();
+        dbHandler.commit();
+        dbHandler.closeSession();
+        dbHandler.startSession();
+        dbHandler.startTransaction();
         dataOperator.saveStream();
+        dbHandler.commit();
+        dbHandler.closeSession();
+        dbHandler.startSession();
+        dbHandler.startTransaction();
         dataOperator.saveChannel();
+        dbHandler.commit();
+        dbHandler.closeSession();
         dbHandler.close();
     }
 

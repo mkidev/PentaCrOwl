@@ -50,7 +50,7 @@ public class DBHandlerImplTest {
     }
     @Before
     public void before() {
-        dbh = new DBHandlerImpl(HibernateUtil.getSessionFactory().openSession());
+        dbh = new DBHandlerImpl(HibernateUtil.getSessionFactory());
 
     }
 
