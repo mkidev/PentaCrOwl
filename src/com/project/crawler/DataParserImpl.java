@@ -70,7 +70,7 @@ public class DataParserImpl implements DataParser {
             streams.add(new Stream(source, channel, game, createdAt, previewPicture));
         }
 
-        return null;
+        return streams;
     }
 
 
