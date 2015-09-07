@@ -16,10 +16,8 @@ public class DataOperator {
     private static DataCrawler dataCrawler;
     private static DataParser dataParser;
     private static DBHandler dbHandler;
-    private String crawledGamesData = "";
-    String games;
-    String channels;
-    String streams;
+
+
     public DataParser getDataParser() {
         return dataParser;
     }
@@ -39,6 +37,7 @@ public class DataOperator {
     }
     public static void main(String[] args){
         DataOperator dataOperator = new DataOperator();
+
         dataOperator.saveGames();
         dataOperator.saveStream();
         dataOperator.saveChannel();
@@ -47,7 +46,7 @@ public class DataOperator {
 
     public void saveGames(){
         List<Game> games = new ArrayList<Game>();
-        games = dataParser.parseGames(getCrawledGamesData());
+        games = dataParser.parseGames();
 
         games.forEach(g ->
         {
@@ -59,7 +58,7 @@ public class DataOperator {
         List<Game> game = new ArrayList<Game>();
         List<Stream> stream = new ArrayList<Stream>();
         List<String> gameName = new ArrayList<String>();
-        game = dataParser.parseGames(getCrawledGamesData());
+        game = dataParser.parseGames();
         game.forEach(g->
         {
             gameName.add(g.getName());
@@ -67,7 +66,7 @@ public class DataOperator {
 
         gameName.forEach(gn->
         {
-            stream.addAll(dataParser.parseStreams(gn,dataCrawler.getStreams(gn)));
+            stream.addAll(dataParser.parseStreams(gn));
         });
 
         stream.forEach(s->
@@ -82,7 +81,7 @@ public class DataOperator {
         List<Game> game = new ArrayList<Game>();
         List<Channel> channel = new ArrayList<Channel>();
         List<String> gameName = new ArrayList<String>();
-        game = dataParser.parseGames(getCrawledGamesData());
+        game = dataParser.parseGames();
         game.forEach(g->
         {
             gameName.add(g.getName());
@@ -90,19 +89,13 @@ public class DataOperator {
 
         gameName.forEach(gn->
         {
-            channel.addAll(dataParser.parseChannels(gn, dataCrawler.getChannels(gn)));
+            channel.addAll(dataParser.parseChannels(gn));
         });
 
         channel.forEach(ch ->
         {
+
             dbHandler.save(ch);
         });
-    }
-
-    private String getCrawledGamesData(){
-        if(crawledGamesData.equals("")) {
-            crawledGamesData = dataCrawler.getGames();
-        }
-        return crawledGamesData;
     }
 }

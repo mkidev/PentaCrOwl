@@ -43,10 +43,10 @@ public class DataCrawlerImpl implements DataCrawler {
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
+        result = response.toString();
         in.close();
-        
 
-        return result = response.toString();
+        return result;
 
     }
 
