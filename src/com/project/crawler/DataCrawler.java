@@ -7,7 +7,7 @@ import java.util.List;
  */
 public interface DataCrawler {
 
-    String getChannels();
+    String getChannels(String channel);
     String getStreams(String game);
     String getGames();
 }

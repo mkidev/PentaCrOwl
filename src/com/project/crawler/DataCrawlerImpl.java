@@ -15,8 +15,6 @@ import java.util.Objects;
  * Created by arash on 06.09.2015.
  */
 public class DataCrawlerImpl implements DataCrawler {
-    String _streamerResults ="Fehler";
-    String _channelResults ="Fehler";
     DataParser parser;
 
 
@@ -63,9 +61,19 @@ public class DataCrawlerImpl implements DataCrawler {
         return result;
     }
 
-    @Override
-    public String getChannels() {
-        return null;
+
+    public String getChannels(String channel) {
+        String result="Fehler";
+        String channelsGeneral = "https://api.twitch.tv/kraken/streams/";
+
+        try {
+            result = executeGet(channelsGeneral + channel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return result;
     }
 
     public String getStreams(String game){
