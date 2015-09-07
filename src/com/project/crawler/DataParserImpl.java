@@ -28,8 +28,7 @@ public class DataParserImpl implements DataParser {
         ArrayList<Channel> channelArray = new ArrayList<Channel>();
 
         String username = jsonChannel.getJSONObject("stream").getString("name");
-        // ODER String username = jsonChannel.getJSONObject("stream").getString("display_name");
-        User user = new User(username); //ODER nach User XY suchen
+        User user = new User(username); //TODO nach User XY suchen
 
         // Unauthorized
         // String subscriber = jsonChannel.getJSONObject("stream").getJSONObject("channel").getJSONObject("_links").getString("subscriptions");
