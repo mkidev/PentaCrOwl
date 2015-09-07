@@ -3,6 +3,7 @@ package com.project.model;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,7 +12,7 @@ import java.util.Date;
 /**
  * Created by marcel on 15.04.2015.
  */
-@DynamicUpdate
+@Entity
 @Table
 public class Stream {
     @Id
