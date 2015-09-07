@@ -16,7 +16,7 @@ public class DataOperator {
     private static DataCrawler dataCrawler;
     private static DataParser dataParser;
     private static DBHandler dbHandler;
-    private String crawledGamesData = "";
+    private ArrayList<String> crawledGamesData = new ArrayList<>();
 
     public DataParser getDataParser() {
         return dataParser;
@@ -97,8 +97,8 @@ public class DataOperator {
         });
     }
 
-    private String getCrawledGamesData(){
-        if(crawledGamesData.equals("")) {
+    private ArrayList<String> getCrawledGamesData(){
+        if(crawledGamesData.isEmpty()) {
             crawledGamesData = dataCrawler.getGames();
         }
         return crawledGamesData;
