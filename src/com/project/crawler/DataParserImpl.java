@@ -31,12 +31,12 @@ public class DataParserImpl implements DataParser {
             String name = jsonArray.getJSONObject(i).getString("name");
             int views = jsonArray.getJSONObject(i).getInt("views");
             int follower = jsonArray.getJSONObject(i).getInt("followers");
-            String link = jsonArray.getJSONObject(i).getString("url");
+            String source = jsonArray.getJSONObject(i).getString("url");
 
             // ein weiterer HTTP-Request mit anschließender Verarbeitung wird benötigt
-            // String group = jsonChannel.getJSONObject("stream").getJSONObject("channel").getJSONObject("_links").getString("teams");
+            // String group = jsonChannel.getJSONObject("stream").getJSONObject("channel").getJSONObject("_sources").getString("teams");
 
-            channels.add(new Channel(name, views, follower, link));
+            channels.add(new Channel(name, views, follower, source));
 
         }
 
