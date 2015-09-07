@@ -16,7 +16,11 @@ public class DataParserImplTest {
 
     @Test
     public void testParseStreams() throws Exception {
+        String s = "2015-09-07T05:29:43Z";
+        String s1 = s.substring(0, 10);
+        String s2 = s.substring(11, 19);
 
+        System.out.println(s1 + " " + s2);
     }
 
     @Test

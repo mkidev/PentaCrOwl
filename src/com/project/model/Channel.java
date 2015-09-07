@@ -59,12 +59,10 @@ public class Channel {
     private String link;
     private String group;
 
-    public Channel(User user, int subscriber, int follower, String link, String group) {
+    public Channel(User user, int follower, String link) {
         this.user = user;
-        this.subscriber = subscriber;
         this.follower = follower;
         this.link = link;
-        this.group = group;
     }
 
 }
