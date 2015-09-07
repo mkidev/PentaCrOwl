@@ -88,7 +88,7 @@ public class DataOperator {
 
         gameName.forEach(gn->
         {
-            channel.addAll(dataParser.parseChannel(gn));
+            channel.addAll(dataParser.parseChannels(gn));
         });
 
         channel.forEach(ch ->
