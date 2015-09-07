@@ -14,6 +14,7 @@ public interface DBHandler {
     Object update(Object object);
     void delete(Object object);
     void close();
+    boolean checkExists(Object object);
 
     <T> Object get(Class<T> gameClass, Serializable aLong);
     Game getGameByName(String name);

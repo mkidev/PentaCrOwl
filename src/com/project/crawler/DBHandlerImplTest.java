@@ -15,7 +15,7 @@ public class DBHandlerImplTest {
 
     DBHandler dbh;
     static Game testGame;
-
+    @Ignore
     @Test
     public void test1Save() throws Exception {
         assertEquals(testGame, dbh.save(testGame));
@@ -38,11 +38,16 @@ public class DBHandlerImplTest {
         System.out.println("Delete passed.");
 
     }
+
     @Test
     public void test4aGetGameByname() throws Exception {
         assertEquals(testGame, dbh.getGameByName(testGame.getName()));
     }
 
+    @Test
+    public void test5CheckExists() throws Exception {
+        assertEquals(true,dbh.checkExists(testGame));
+    }
     @Before
     public void before() {
         dbh = new DBHandlerImpl(HibernateUtil.getSessionFactory().openSession());
@@ -51,11 +56,12 @@ public class DBHandlerImplTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        testGame = new Game("LOL", 8888);
+        testGame = new Game("League of Legends", 8888);
     }
 
     @After
     public void tearDown() throws Exception {
         dbh.close();
     }
+
 }

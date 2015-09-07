@@ -5,6 +5,8 @@ import com.project.model.Game;
 import com.project.model.Stream;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
 import java.io.Serializable;
 
 /**
@@ -39,17 +41,17 @@ public class DBHandlerImpl implements DBHandler {
 
     @Override
     public Game getGameByName(String name) {
-        return (Game) session.createQuery("from Game where name=?").setString(0,name).uniqueResult();
+        return (Game) session.createQuery("from Game where name=:name").setString("name",name).uniqueResult();
     }
 
     @Override
     public Stream getStreamByName(String name) {
-        return (Stream) session.createQuery("from Stream where name=?").setString(0,name).uniqueResult();
+        return (Stream) session.createQuery("from Stream where name=:name").setString("name",name).uniqueResult();
     }
 
     @Override
     public Channel getChannelByName(String name) {
-        return (Channel) session.createQuery("from Channel where name=?").setString(0,name).uniqueResult();
+        return (Channel) session.createQuery("from Channel where name=:name").setString("name",name).uniqueResult();
     }
 
     @Override
@@ -57,8 +59,40 @@ public class DBHandlerImpl implements DBHandler {
         session.delete(object);
     }
 
+    @Override
     public void close(){
         transaction.commit();
         session.close();
     }
+
+    @Override
+    public boolean checkExists(Object object) {
+        boolean result = false;
+        try {
+            if (object instanceof Game) {
+                Game gameToCheck = (Game) object;
+                Game game = (Game) session.createCriteria(Game.class).add(Restrictions.eq("name", gameToCheck.getName())).uniqueResult();
+                if(game!=null) {
+                    result = true;
+                }
+            } else if (object instanceof Channel) {
+                Channel channelToCheck = (Channel) object;
+                Channel channel = (Channel) session.createCriteria(Channel.class).add(Restrictions.eq("name", channelToCheck.getName())).uniqueResult();
+                if(channel!=null) {
+                    result = true;
+                }
+            } else if (object instanceof Stream) {
+                Stream streamToCheck = (Stream) object;
+                Stream stream = (Stream) session.createCriteria(Stream.class).add(Restrictions.eq("channel", streamToCheck.getChannel())).uniqueResult();
+                if(stream!=null) {
+                    result = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 }
