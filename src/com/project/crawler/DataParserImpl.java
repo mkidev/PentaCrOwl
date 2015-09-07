@@ -22,7 +22,7 @@ public class DataParserImpl implements DataParser {
         this.crawler = crawler;
     }
 
-    public ArrayList<Channel> parseChannels(String game,String crawledChannelsData){
+    public ArrayList<Channel> parseChannels(String game, String crawledChannelsData){
         JSONObject jsonChannel = new JSONObject(crawledChannelsData);
         JSONArray jsonArray = jsonChannel.getJSONArray("channels");
         ArrayList<Channel> channels = new ArrayList<Channel>();
@@ -43,7 +43,7 @@ public class DataParserImpl implements DataParser {
         return channels;
     }
 
-    public ArrayList<Stream> parseStreams(String game,String crawledStreamsData) {
+    public ArrayList<Stream> parseStreams(String game, String crawledStreamsData) {
         JSONObject jsonStreams = new JSONObject(crawledStreamsData);
         JSONArray jsonArray = jsonStreams.getJSONArray("streams");
         ArrayList<Stream> streams = new ArrayList<Stream>();
@@ -51,6 +51,7 @@ public class DataParserImpl implements DataParser {
         for (int i = 0; i < jsonArray.length(); i++) {
             String source = jsonArray.getJSONObject(i).getJSONObject("_links").getString("self");
             String channel = jsonArray.getJSONObject(i).getJSONObject("channel").getString("name");
+            int viewers = jsonArray.getJSONObject(i).getInt("viewers");
 
             //Greenwich time
             String createdAtString = jsonArray.getJSONObject(i).getString("created_at");
@@ -67,7 +68,7 @@ public class DataParserImpl implements DataParser {
 
             String previewPicture = jsonArray.getJSONObject(i).getJSONObject("preview").getString("template");
 
-            streams.add(new Stream(source, channel, game, createdAt, previewPicture));
+            streams.add(new Stream(source, channel, game, viewers, createdAt, previewPicture));
         }
 
         return streams;
