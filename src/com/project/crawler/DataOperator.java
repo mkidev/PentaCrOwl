@@ -39,6 +39,7 @@ public class DataOperator {
 
         dataOperator.saveGames();
         dataOperator.saveStream();
+        dataOperator.saveChannel();
 
     }
 
@@ -76,20 +77,21 @@ public class DataOperator {
     }
 
     public void saveChannel(){
+        List<Game> game = new ArrayList<Game>();
         List<Channel> channel = new ArrayList<Channel>();
-        List<String> channelName = new ArrayList<String>();
-
-        channel.forEach(c->
+        List<String> gameName = new ArrayList<String>();
+        game = dataParser.parseGames();
+        game.forEach(g->
         {
-            channelName.add(c.getName());
+            gameName.add(g.getName());
         });
 
-        channelName.forEach(cn->
+        gameName.forEach(gn->
         {
-            channel.addAll(dataParser.parseChannels(cn));
+            channel.addAll(dataParser.parseChannel(gn));
         });
 
-        channel.forEach(ch->
+        channel.forEach(ch ->
         {
 
             dbHandler.save(ch);
