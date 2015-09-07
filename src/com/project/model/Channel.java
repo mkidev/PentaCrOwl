@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * Created by arash on 07.09.2015.
@@ -17,12 +16,15 @@ public class Channel {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment" , strategy = "increment")
-    private int id;
+    private int channelID;
     private String name;
     private int follower;
-    private String link;
-    private String group;
+    private String source;
     private int views;
+
+    public Channel()
+    {
+    }
 
     public String getName() {
         return name;
@@ -32,12 +34,12 @@ public class Channel {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getChannelID() {
+        return channelID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setChannelID(int channelID) {
+        this.channelID = channelID;
     }
 
     public int getViews() {
@@ -48,20 +50,12 @@ public class Channel {
         this.views = views;
     }
 
-    private String getGroup() {
-        return group;
+    public String getSource() {
+        return source;
     }
 
-    private void setGroup(String group) {
-        this.group = group;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
+    public void setSource(String source) {
+        this.source = source;
     }
 
 
@@ -75,15 +69,13 @@ public class Channel {
 
 
 
-    public Channel(String name, int views, int follower, String link) {
+    public Channel(String name, int views, int follower, String source) {
         this.name = name;
         this.views = views;
         this.follower = follower;
-        this.link = link;
+        this.source = source;
     }
 
-    public Channel()
-    {
-    }
+
 
 }

@@ -1,6 +1,5 @@
 package com.project.model;
 
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -22,6 +21,7 @@ public class Stream {
     private String source;
     private String channel;
     private String game;
+    private int viewers;
     private Date createdAt;
     private String previewPicture;
 
@@ -29,10 +29,11 @@ public class Stream {
     public Stream() {
     }
 
-    public Stream(String source, String channel, String game, Date createdAt, String previewPicture) {
+    public Stream(String source, String channel, String game, int viewers, Date createdAt, String previewPicture) {
         this.source = source;
         this.channel = channel;
         this.game = game;
+        this.viewers = viewers;
         this.createdAt = createdAt;
         this.previewPicture = previewPicture;
     }
@@ -56,6 +57,14 @@ public class Stream {
 
     public String getGame() {
         return game;
+    }
+
+    public int getViewers() {
+        return viewers;
+    }
+
+    public void setViewers(int viewers) {
+        this.viewers = viewers;
     }
 
     public Date getCreatedAt() {

@@ -22,9 +22,8 @@
         <property name="current_session_context_class">thread</property>
 
         <mapping class="com.project.model.User" />
+        <mapping class="com.project.model.Channel" />
         <mapping class="com.project.model.Stream" />
         <mapping class="com.project.model.Game" />
-        <mapping class="com.project.model.Channel" />
-
     </session-factory>
 </hibernate-configuration>
