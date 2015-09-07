@@ -44,6 +44,7 @@ public class DataCrawlerImpl implements DataCrawler {
             response.append(inputLine);
         }
         in.close();
+        
 
         return result = response.toString();
 

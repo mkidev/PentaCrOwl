@@ -1,5 +1,6 @@
 package com.project.crawler;
 
+import com.project.crawler.util.HibernateUtil;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
@@ -33,6 +34,7 @@ public class DataOperator {
     public DataOperator() {
         dataCrawler = new DataCrawlerImpl();
         dataParser = new DataParserImpl(dataCrawler);
+        dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory().openSession());
     }
     public static void main(String[] args){
         DataOperator dataOperator = new DataOperator();
@@ -40,7 +42,7 @@ public class DataOperator {
         dataOperator.saveGames();
         dataOperator.saveStream();
         dataOperator.saveChannel();
-
+        dbHandler.close();
     }
 
     public void saveGames(){
