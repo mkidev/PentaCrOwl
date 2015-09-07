@@ -16,7 +16,7 @@ import java.util.Date;
 public class Stream {
     @Id
     @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment" , strategy = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private int id;
     private String source;
     private String channel;
@@ -25,9 +25,8 @@ public class Stream {
     private Date createdAt;
     private String previewPicture;
 
-    
-    public Stream() {
-    }
+
+    public Stream() {}
 
     public Stream(String source, String channel, String game, int viewers, Date createdAt, String previewPicture) {
         this.source = source;

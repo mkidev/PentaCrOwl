@@ -1,4 +1,4 @@
-package com.project.crawler;
+package com.project.database;
 
 import com.project.model.Channel;
 import com.project.model.Game;
@@ -20,4 +20,6 @@ public interface DBHandler {
     Game getGameByName(String name);
     Stream getStreamByName(String name);
     Channel getChannelByName(String name);
+
+    Object saveOrUpdate(Object object);
 }

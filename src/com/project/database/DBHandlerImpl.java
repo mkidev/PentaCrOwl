@@ -1,4 +1,4 @@
-package com.project.crawler;
+package com.project.database;
 
 import com.project.model.Channel;
 import com.project.model.Game;
@@ -52,6 +52,12 @@ public class DBHandlerImpl implements DBHandler {
     @Override
     public Channel getChannelByName(String name) {
         return (Channel) session.createQuery("from Channel where name=:name").setString("name",name).uniqueResult();
+    }
+
+    @Override
+    public Object saveOrUpdate(Object object) {
+        session.saveOrUpdate(object);
+        return object;
     }
 
     @Override
