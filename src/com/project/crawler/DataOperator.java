@@ -1,10 +1,11 @@
 package com.project.crawler;
 
 import com.project.crawler.util.HibernateUtil;
+import com.project.database.DBHandler;
+import com.project.database.DBHandlerImpl;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
-import com.project.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

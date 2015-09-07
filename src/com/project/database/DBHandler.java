@@ -1,4 +1,4 @@
-package com.project.crawler;
+package com.project.database;
 
 import com.project.model.Channel;
 import com.project.model.Game;
