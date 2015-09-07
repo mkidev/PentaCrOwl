@@ -24,6 +24,10 @@ public class Stream {
     private Date createdAt;
     private String previewPicture;
 
+    
+    public Stream() {
+    }
+
     public Stream(String source, String channel, String game, Date createdAt, String previewPicture) {
         this.source = source;
         this.channel = channel;
