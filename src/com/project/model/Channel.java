@@ -53,16 +53,40 @@ public class Channel {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment" , strategy = "increment")
+    private int id;
     private User user;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private String name;
     private int subscriber;
     private int follower;
     private String link;
     private String group;
 
-    public Channel(User user, int follower, String link) {
+    public Channel(User user,String name, int follower, String link) {
         this.user = user;
         this.follower = follower;
         this.link = link;
+    }
+
+    public Channel()
+    {
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.project.crawler;
 
+import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
 import com.project.model.User;
@@ -45,7 +46,7 @@ public class DataOperator {
         List<Game> games = new ArrayList<Game>();
         games = dataParser.parseGames();
 
-        games.forEach(g->
+        games.forEach(g ->
         {
             dbHandler.save(g);
         });
@@ -72,5 +73,26 @@ public class DataOperator {
             dbHandler.save(s);
         });
 
+    }
+
+    public void saveChannel(){
+        List<Channel> channel = new ArrayList<Channel>();
+        List<String> channelName = new ArrayList<String>();
+
+        channel.forEach(c->
+        {
+            channelName.add(c.getName());
+        });
+
+        channelName.forEach(cn->
+        {
+            channel.addAll(dataParser.parseChannels(cn));
+        });
+
+        channel.forEach(ch->
+        {
+
+            dbHandler.save(ch);
+        });
     }
 }
