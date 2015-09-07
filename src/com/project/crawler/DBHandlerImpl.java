@@ -32,7 +32,7 @@ public class DBHandlerImpl implements DBHandler {
     }
 
     public Object update(Object object) {
-        session.saveOrUpdate(object);
+        session.update(object);
         return object;
     }
     public <T> Object get(Class<T> clazz, Serializable id) {
