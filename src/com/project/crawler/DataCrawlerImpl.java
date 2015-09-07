@@ -30,7 +30,7 @@ public class DataCrawlerImpl implements DataCrawler {
 
         // optional default is GET
         con.setRequestMethod("GET");
-
+        System.out.println("url = " + url);
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL : " + url);
         System.out.println("Response Code : " + responseCode);
@@ -85,8 +85,6 @@ public class DataCrawlerImpl implements DataCrawler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return result;
     }
 

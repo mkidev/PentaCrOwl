@@ -22,8 +22,7 @@ public class DataParserImpl implements DataParser {
         this.crawler = crawler;
     }
 
-    public ArrayList<Channel> parseChannels(String game){
-        String crawledChannelsData = crawler.getChannels(game);
+    public ArrayList<Channel> parseChannels(String game,String crawledChannelsData){
         JSONObject jsonChannel = new JSONObject(crawledChannelsData);
         JSONArray jsonArray = jsonChannel.getJSONArray("channel");
         ArrayList<Channel> channels = new ArrayList<Channel>();
@@ -44,9 +43,7 @@ public class DataParserImpl implements DataParser {
         return channels;
     }
 
-    public ArrayList<Stream> parseStreams(String game) {
-        String crawledStreamsData = crawler.getStreams(game);
-
+    public ArrayList<Stream> parseStreams(String game,String crawledStreamsData) {
         JSONObject jsonStreams = new JSONObject(crawledStreamsData);
         JSONArray jsonArray = jsonStreams.getJSONArray("streams");
         ArrayList<Stream> streams = new ArrayList<Stream>();
@@ -77,9 +74,7 @@ public class DataParserImpl implements DataParser {
     }
 
 
-    public ArrayList<Game> parseGames() {
-        String crawledGamesData = crawler.getGames();
-
+    public ArrayList<Game> parseGames(String crawledGamesData) {
         JSONObject jsonGames = new JSONObject(crawledGamesData);
         JSONArray jsonArray = jsonGames.getJSONArray("top");
         ArrayList<Game> games = new ArrayList<Game>();

@@ -30,7 +30,7 @@ public class DataParserImplTest {
     public void testParseGames() throws Exception {
         DataCrawlerImpl crawler = new DataCrawlerImpl();
         DataParserImpl parser = new DataParserImpl(crawler);
-        ArrayList<Game> games = parser.parseGames();
+        ArrayList<Game> games = parser.parseGames(crawler.getGames());
         games.forEach(game -> System.out.println(game.getName()));
     }
 }

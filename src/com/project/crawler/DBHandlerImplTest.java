@@ -39,7 +39,7 @@ public class DBHandlerImplTest {
 
     }
     @Test
-    public void test4GetGameByname() throws Exception {
+    public void test4aGetGameByname() throws Exception {
         assertEquals(testGame, dbh.getGameByName(testGame.getName()));
     }
 
