@@ -59,7 +59,7 @@ public class DataCrawlerImpl implements DataCrawler {
     {
         String GAMES_TOP_URL = "https://api.twitch.tv/kraken/games/top";
         ArrayList<String> games = new ArrayList<String>();
-        String streamsOffset = "&limit=100&offset=";
+        String streamsOffset = "?limit=100&offset=";
 
         int maxOffSet=0;
         maxOffSet = getMaxOffsetGames();
@@ -67,10 +67,9 @@ public class DataCrawlerImpl implements DataCrawler {
         for (int offset = 0; maxOffSet >= offset; offset = offset + 100)
         {
             if (maxOffSet - offset <= 100){
-
-                offset = maxOffSet - offset;
+                int rest = maxOffSet - offset;
                 try {
-                    games.add(executeGet(GAMES_TOP_URL + streamsOffset + offset + ""));
+                    games.add(executeGet(GAMES_TOP_URL + streamsOffset + rest + ""));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -94,7 +93,7 @@ public class DataCrawlerImpl implements DataCrawler {
     public ArrayList<String> getChannels(String game) {
         ArrayList<String> channels = new ArrayList<String>();
         String channelsGeneral = "https://api.twitch.tv/kraken/search/channels?q=";
-        String streamsOffset = "&limit=100&offset=";
+        String streamsOffset = "?limit=100&offset=";
 
         int maxOffSet=0;
         maxOffSet = getMaxOffsetChannels(game);
@@ -104,9 +103,9 @@ public class DataCrawlerImpl implements DataCrawler {
         {
             if (maxOffSet - offset <= 100){
 
-                offset = maxOffSet - offset;
+                int rest = maxOffSet - offset;
                 try {
-                    channels.add(executeGet(channelsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                    channels.add(executeGet(channelsGeneral + URLEncoder.encode(game) + streamsOffset + rest + ""));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -129,7 +128,7 @@ public class DataCrawlerImpl implements DataCrawler {
         ArrayList<String> streams = new ArrayList<String>();
 
         String streamsGeneral = "https://api.twitch.tv/kraken/streams?game=";
-        String streamsOffset = "&limit=100&offset=";
+        String streamsOffset = "?limit=100&offset=";
 
         int maxOffSet=0;
         maxOffSet = getMaxOffsetStreams(game);
@@ -139,9 +138,9 @@ public class DataCrawlerImpl implements DataCrawler {
         {
             if (maxOffSet - offset <= 100){
 
-                offset = maxOffSet - offset;
+                int rest = maxOffSet - offset;
                 try {
-                    streams.add(executeGet(streamsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                    streams.add(executeGet(streamsGeneral + URLEncoder.encode(game) + streamsOffset + rest + ""));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
