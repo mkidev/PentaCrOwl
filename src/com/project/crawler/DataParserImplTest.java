@@ -1,6 +1,9 @@
 package com.project.crawler;
 
+import com.project.model.Game;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -27,6 +30,7 @@ public class DataParserImplTest {
     public void testParseGames() throws Exception {
         DataCrawlerImpl crawler = new DataCrawlerImpl();
         DataParserImpl parser = new DataParserImpl(crawler);
-        parser.parseGames();
+        ArrayList<Game> games = parser.parseGames();
+        games.forEach(game -> System.out.println(game.getName()));
     }
 }

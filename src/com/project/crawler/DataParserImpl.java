@@ -22,10 +22,9 @@ public class DataParserImpl implements DataParser {
         this.crawler = crawler;
     }
 
-    public ArrayList<Channel> parseChannels(String channel){
+    public Channel parseChannel(String channel){
         String crawledGamesData = crawler.getChannels(channel);
         JSONObject jsonChannel = new JSONObject(crawledGamesData);
-        ArrayList<Channel> channelArray = new ArrayList<Channel>();
 
         String username = jsonChannel.getJSONObject("stream").getString("name");
         User user = new User(username); //TODO nach User XY suchen
@@ -39,9 +38,9 @@ public class DataParserImpl implements DataParser {
         // ein weiterer HTTP-Request mit anschließender Verarbeitung wird benötigt
         // String group = jsonChannel.getJSONObject("stream").getJSONObject("channel").getJSONObject("_links").getString("teams");
 
-        channelArray.add(new Channel(user, follower, link));
+        Channel channelResult = new Channel(user, follower, link);
 
-        return channelArray;
+        return channelResult;
     }
 
     public ArrayList<Stream> parseStreams(String game) {
