@@ -1,5 +1,7 @@
 package com.project.crawler;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  */
 public interface DataCrawler {
 
-    String getChannels(String game);
-    String getStreams(String game);
-    String getGames();
+    ArrayList<String> getChannels(String game);
+    ArrayList<String> getStreams(String game);
+    ArrayList<String> getGames();
 }

@@ -1,10 +1,12 @@
 package com.project.crawler;
 
 import com.project.model.Game;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -16,14 +18,15 @@ import java.util.Objects;
  * Created by arash on 06.09.2015.
  */
 public class DataCrawlerImpl implements DataCrawler {
-    DataParser parser;
-
+    DataOperator operator;
 
 
     public DataCrawlerImpl(){
 
 
     }
+
+
     private String executeGet(String url) throws Exception {
         String result;
         URL obj = new URL(url);
@@ -52,45 +55,162 @@ public class DataCrawlerImpl implements DataCrawler {
 
     }
 
-    public String getGames(){
-        String result="Fehler";
+    public ArrayList<String> getGames()
+    {
         String GAMES_TOP_URL = "https://api.twitch.tv/kraken/games/top";
-        try {
-           result = executeGet(GAMES_TOP_URL);
-        } catch (Exception e) {
-            e.printStackTrace();
+        ArrayList<String> games = new ArrayList<String>();
+        String streamsOffset = "&limit=100&offset=";
+
+        int maxOffSet=0;
+        maxOffSet = getMaxOffsetGames();
+
+        for (int offset = 0; maxOffSet >= offset; offset = offset + 100)
+        {
+            if (maxOffSet - offset <= 100){
+
+                offset = maxOffSet - offset;
+                try {
+                    games.add(executeGet(GAMES_TOP_URL + streamsOffset + offset + ""));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+            else {
+                try {
+                    games.add(executeGet(GAMES_TOP_URL + streamsOffset + offset + ""));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        return result;
+
+        return games;
+
     }
 
 
-    public String getChannels(String game) {
-        String result="Fehler";
+    public ArrayList<String> getChannels(String game) {
+        ArrayList<String> channels = new ArrayList<String>();
         String channelsGeneral = "https://api.twitch.tv/kraken/search/channels?q=";
+        String streamsOffset = "&limit=100&offset=";
 
-        try {
-            result = executeGet(channelsGeneral + URLEncoder.encode(game));
-        } catch (Exception e) {
-            e.printStackTrace();
+        int maxOffSet=0;
+        maxOffSet = getMaxOffsetChannels(game);
+
+
+        for (int offset = 0; maxOffSet >= offset; offset = offset + 100)
+        {
+            if (maxOffSet - offset <= 100){
+
+                offset = maxOffSet - offset;
+                try {
+                    channels.add(executeGet(channelsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+            else {
+                try {
+                    channels.add(executeGet(channelsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
-        return result;
+        return channels;
     }
 
-    public String getStreams(String game){
+    public ArrayList<String> getStreams(String game){
+        ArrayList<String> streams = new ArrayList<String>();
+
+        String streamsGeneral = "https://api.twitch.tv/kraken/streams?game=";
+        String streamsOffset = "&limit=100&offset=";
+
+        int maxOffSet=0;
+        maxOffSet = getMaxOffsetStreams(game);
+
+
+        for (int offset = 0; maxOffSet >= offset; offset = offset + 100)
+        {
+            if (maxOffSet - offset <= 100){
+
+                offset = maxOffSet - offset;
+                try {
+                    streams.add(executeGet(streamsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+            else {
+                try {
+                    streams.add(executeGet(streamsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return streams;
+    }
+
+    public int getMaxOffsetStreams(String game)
+    {
+        JSONObject jsonStreams;
+        int total = 0;
         String result="Fehler";
         String streamsGeneral = "https://api.twitch.tv/kraken/streams?game=";
         try {
             result = executeGet(streamsGeneral + URLEncoder.encode(game));
+            jsonStreams = new JSONObject(result);
+            total = jsonStreams.getInt("_total");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+
+        return total;
     }
 
+    public int getMaxOffsetChannels(String game)
+    {
+        JSONObject jsonStreams;
+        int total = 0;
+        String result="Fehler";
+        String channelGeneral = "https://api.twitch.tv/kraken/search/channels?q=";
+        try {
+            result = executeGet(channelGeneral + URLEncoder.encode(game));
+            jsonStreams = new JSONObject(result);
+            total = jsonStreams.getInt("_total");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return total;
+    }
+
+    public int getMaxOffsetGames()
+    {
+        JSONObject jsonStreams;
+        int total = 0;
+        String result="Fehler";
+        String gamesGeneral = "https://api.twitch.tv/kraken/games/top";
+
+        try {
+            result = executeGet(gamesGeneral);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        jsonStreams = new JSONObject(result);
+        total = jsonStreams.getInt("_total");
+
+
+        return total;
+    }
 
 
 
