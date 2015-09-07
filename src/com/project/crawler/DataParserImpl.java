@@ -22,25 +22,26 @@ public class DataParserImpl implements DataParser {
         this.crawler = crawler;
     }
 
-    public Channel parseChannel(String channel){
-        String crawledGamesData = crawler.getChannels(channel);
-        JSONObject jsonChannel = new JSONObject(crawledGamesData);
+    public ArrayList<Channel> parseChannels(String game){
+        String crawledChannelsData = crawler.getChannels(game);
+        JSONObject jsonChannel = new JSONObject(crawledChannelsData);
+        JSONArray jsonArray = jsonChannel.getJSONArray("channel");
+        ArrayList<Channel> channels = new ArrayList<Channel>();
 
-        String username = jsonChannel.getJSONObject("stream").getString("name");
-        User user = new User(username); //TODO nach User XY suchen
+        for (int i = 0; i < jsonArray.length(); i++) {
+            String name = jsonArray.getJSONObject(i).getString("name");
+            int views = jsonArray.getJSONObject(i).getInt("views");
+            int follower = jsonArray.getJSONObject(i).getInt("follower");
+            String link = jsonArray.getJSONObject(i).getString("url");
 
-        // Unauthorized
-        // String subscriber = jsonChannel.getJSONObject("stream").getJSONObject("channel").getJSONObject("_links").getString("subscriptions");
+            // ein weiterer HTTP-Request mit anschließender Verarbeitung wird benötigt
+            // String group = jsonChannel.getJSONObject("stream").getJSONObject("channel").getJSONObject("_links").getString("teams");
 
-        int follower = jsonChannel.getJSONObject("stream").getInt("follower");
-        String link = jsonChannel.getJSONObject("stream").getString("url");
+            channels.add(new Channel(name, views, follower, link));
 
-        // ein weiterer HTTP-Request mit anschließender Verarbeitung wird benötigt
-        // String group = jsonChannel.getJSONObject("stream").getJSONObject("channel").getJSONObject("_links").getString("teams");
+        }
 
-        Channel channelResult = new Channel(user, follower, link);
-
-        return channelResult;
+        return channels;
     }
 
     public ArrayList<Stream> parseStreams(String game) {

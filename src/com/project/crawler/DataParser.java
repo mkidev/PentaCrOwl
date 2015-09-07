@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by Daniel Steger on 06.09.15.
  */
 public interface DataParser {
-    Channel parseChannel(String channel);
+    ArrayList<Channel> parseChannels(String game);
     ArrayList<Stream> parseStreams(String game);
     ArrayList<Game> parseGames();
 }

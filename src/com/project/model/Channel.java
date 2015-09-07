@@ -10,19 +10,12 @@ import java.util.Date;
  * Created by arash on 07.09.2015.
  */
 public class Channel {
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getGroup() {
+    private String getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    private void setGroup(String group) {
         this.group = group;
     }
 
@@ -34,13 +27,6 @@ public class Channel {
         this.link = link;
     }
 
-    public int getSubscriber() {
-        return subscriber;
-    }
-
-    public void setSubscriber(int subscriber) {
-        this.subscriber = subscriber;
-    }
 
     public int getFollower() {
         return follower;
@@ -72,14 +58,25 @@ public class Channel {
         this.id = id;
     }
 
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+
+
     private String name;
-    private int subscriber;
     private int follower;
     private String link;
     private String group;
+    private int views;
 
-    public Channel(User user,String name, int follower, String link) {
-        this.user = user;
+    public Channel(String name, int views, int follower, String link) {
+        this.name = name;
+        this.views = views;
         this.follower = follower;
         this.link = link;
     }
