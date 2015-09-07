@@ -49,7 +49,7 @@ public class DataOperator {
 
         games.forEach(g ->
         {
-            dbHandler.save(g);
+            dbHandler.saveOrUpdate(g);
         });
     }
 

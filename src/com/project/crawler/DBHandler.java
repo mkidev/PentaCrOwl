@@ -20,4 +20,6 @@ public interface DBHandler {
     Game getGameByName(String name);
     Stream getStreamByName(String name);
     Channel getChannelByName(String name);
+
+    Object saveOrUpdate(Object object);
 }

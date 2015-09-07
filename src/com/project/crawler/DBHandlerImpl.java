@@ -55,6 +55,12 @@ public class DBHandlerImpl implements DBHandler {
     }
 
     @Override
+    public Object saveOrUpdate(Object object) {
+        session.saveOrUpdate(object);
+        return object;
+    }
+
+    @Override
     public void delete(Object object) {
         session.delete(object);
     }
