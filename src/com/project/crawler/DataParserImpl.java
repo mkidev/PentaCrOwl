@@ -18,8 +18,8 @@ import java.util.List;
 public class DataParserImpl implements DataParser {
     private DataCrawler crawler;
 
-    public DataParserImpl(DataOperator operator){
-        this.crawler = operator.getDataCrawler();
+    public DataParserImpl(DataCrawler crawler){
+        this.crawler = crawler;
     }
 
     public ArrayList<Channel> parseChannels(String channel){

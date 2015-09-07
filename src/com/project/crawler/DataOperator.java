@@ -30,8 +30,8 @@ public class DataOperator {
     }
 
     public DataOperator() {
-        dataCrawler = new DataCrawlerImpl(this);
-        dataParser = new DataParserImpl(this);
+        dataCrawler = new DataCrawlerImpl();
+        dataParser = new DataParserImpl(dataCrawler);
     }
     public static void main(String[] args){
         DataOperator dataOperator = new DataOperator();

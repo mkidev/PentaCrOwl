@@ -19,8 +19,8 @@ public class DataCrawlerImpl implements DataCrawler {
 
 
 
-    public DataCrawlerImpl(DataOperator operator){
-         this.parser = operator.getDataParser();
+    public DataCrawlerImpl(){
+
 
     }
     private String executeGet(String url) throws Exception {

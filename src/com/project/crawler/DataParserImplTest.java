@@ -25,6 +25,8 @@ public class DataParserImplTest {
 
     @Test
     public void testParseGames() throws Exception {
-        DataParserImpl parser;
+        DataCrawlerImpl crawler = new DataCrawlerImpl();
+        DataParserImpl parser = new DataParserImpl(crawler);
+        parser.parseGames();
     }
 }

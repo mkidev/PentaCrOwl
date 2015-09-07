@@ -11,8 +11,7 @@ public class DataCrawlerImplTest {
 
     @Test
     public void testGetStreams() throws Exception {
-        DataOperator o = new DataOperator();
-        DataCrawlerImpl dc = new DataCrawlerImpl(o);
+        DataCrawlerImpl dc = new DataCrawlerImpl();
 
 
 
