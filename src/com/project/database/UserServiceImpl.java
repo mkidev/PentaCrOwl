@@ -23,6 +23,17 @@ public class UserServiceImpl
         this.session = sessionFactory.openSession();
     }
 
+
+    public User newUser(String nickName, String userName, String email, String password){
+        User user = new User(nickName, userName, email, password);
+        return user;
+    }
+
+    public void deleteAccount(User user){
+
+    }
+
+
     public User getUser(String userName){
         User user = (User) session.createCriteria(User.class).add(Restrictions.like("userName", userName)).uniqueResult();
         return user;
@@ -38,10 +49,6 @@ public class UserServiceImpl
         return user;
     }
 
-    public User newUser(String nickName, String userName, String email, String password){
-        User user = new User(nickName, userName, email, password);
-        return user;
-    }
 
     public void setEmail(User user, String email){
         user.setEmail(email);
@@ -55,6 +62,11 @@ public class UserServiceImpl
         user.setGeburtsTag(geburtstag);
     }
 
+    public void changePassword(User user, String password){
+
+    }
+
+
     public void followChannel(User user, Channel channel){
         user.followChannel(channel);
     }
@@ -63,11 +75,8 @@ public class UserServiceImpl
         user.subscribeChannel(channel);
     }
 
-    public void deleteAccount(User user){
 
-    }
-
-    public void deleteHistory(User user){
+    public void addFriend(User user, User friend){
 
     }
 
@@ -75,15 +84,12 @@ public class UserServiceImpl
 
     }
 
-    public void addFriend(User user, User friend){
+
+    public void deleteHistory(User user){
 
     }
 
     public boolean available(User user){
         return false;
-    }
-
-    public void changePassword(User user, String password){
-
     }
 }
