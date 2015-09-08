@@ -18,6 +18,7 @@ public class Game {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment" , strategy = "increment")
     private long gameID;
+    @NaturalId
     private final String name;
     private final int viewers;
 

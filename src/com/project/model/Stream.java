@@ -1,6 +1,7 @@
 package com.project.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ public class Stream {
     @GenericGenerator(name = "increment", strategy = "increment")
     private int id;
     private String source;
+    @NaturalId
     private String channel;
     private String game;
     private int viewers;
