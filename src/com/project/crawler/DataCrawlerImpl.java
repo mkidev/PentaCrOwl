@@ -106,7 +106,7 @@ public class DataCrawlerImpl implements DataCrawler {
     public ArrayList<String> getChannels(String game) {
         ArrayList<String> channels = new ArrayList<String>();
         String channelsGeneral = "https://api.twitch.tv/kraken/search/channels?q=";
-        String streamsOffset = "?limit=100&offset=";
+        String streamsOffset = "&limit=100&offset=";
 
         int maxOffSet=0;
         maxOffSet = getMaxOffsetChannels(game);
