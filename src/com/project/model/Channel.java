@@ -18,7 +18,6 @@ public class Channel {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment" , strategy = "increment")
     private int channelID;
-    @NaturalId
     private String name;
     private int follower;
     private String source;
