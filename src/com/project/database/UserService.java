@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public interface UserService
 {
-    public void newUser(String nickName, String userName, String email, String password);
+    public User newUser(String nickName, String userName, String email, String password);
     public void deleteAccount(User user);
 
     public User getUser(String userName);
@@ -22,8 +22,8 @@ public interface UserService
     public void setBirthday(User user, Date geburtstag);
     public void changePassword(User user, String password);
 
-    public boolean followChannel(User user, Channel channel);
-    public boolean subscribeChannel(User user, Channel channel);
+    public void followChannel(User user, Channel channel);
+    public void subscribeChannel(User user, Channel channel);
 
     public void addFriend(User user, User friend);
     public void deleteFriend(User user, User friend);

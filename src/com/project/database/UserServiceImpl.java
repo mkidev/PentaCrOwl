@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by arash on 08.09.2015.
  */
-public class UserServiceImpl
+public class UserServiceImpl implements UserService
 {
     private Session session;
     private Transaction transaction;
