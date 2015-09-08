@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService
     }
 
     public void setBirthday(User user, Date geburtstag){
-        user.setGeburtsTag(geburtstag);
+        user.setGeburtstag(geburtstag);
     }
 
     public void changePassword(User user, String password){

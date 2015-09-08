@@ -20,19 +20,23 @@ public class User {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment" , strategy = "increment")
     private int userID;
+
     @NaturalId
     private String userName;
     private String nickName;
     private String email;
     private String password;
+
     private String name;
     private String vorname;
     private int plattform;
-    private Date geburtsTag;
+    private Date geburtstag;
+    private String picture;
+
     private ArrayList<Channel> followedChannels;
     private ArrayList<Channel> subscribedChannels;
     private ArrayList<Channel> historyChannels;
-    private String picture;
+
 
     public User(String nickName, String userName, String email, String password){
         this.nickName = nickName;
@@ -93,12 +97,12 @@ public class User {
         this.plattform = plattform;
     }
 
-    public Date getGeburtsTag() {
-        return geburtsTag;
+    public Date getGeburtstag() {
+        return geburtstag;
     }
 
-    public void setGeburtsTag(Date geburtsTag) {
-        this.geburtsTag = geburtsTag;
+    public void setGeburtstag(Date geburtstag) {
+        this.geburtstag = geburtstag;
     }
 
     public ArrayList<Channel> getFollowedChannels() {
