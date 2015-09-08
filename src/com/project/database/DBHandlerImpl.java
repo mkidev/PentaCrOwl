@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created by Marcel Kisilowski on 06.09.15.
@@ -63,11 +64,6 @@ public class DBHandlerImpl implements DBHandler {
         return (Channel) session.createQuery("from Channel where name=:name").setString("name",name).uniqueResult();
     }
 
-    @Override
-    public Object saveOrUpdate(Object object) {
-        session.saveOrUpdate(object);
-        return object;
-    }
 
     @Override
     public void delete(Object object) {

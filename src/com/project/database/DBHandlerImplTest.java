@@ -22,14 +22,7 @@ public class DBHandlerImplTest {
         System.out.println("Save passed.");
     }
 
-    @Ignore
-    @Test
-    public void test2Update() throws Exception {
-        testGame = new Game("LOL", 1111);
-        assertEquals(testGame, dbh.update(testGame));
-        System.out.println("Update passed.");
 
-    }
     @Ignore
     @Test
     public void test3Delete() throws Exception {

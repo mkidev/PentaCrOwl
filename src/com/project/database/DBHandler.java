@@ -11,7 +11,6 @@ import java.io.Serializable;
  */
 public interface DBHandler {
     Object save(Object object);
-    Object update(Object object);
     void delete(Object object);
     void closeSession();
     boolean checkExists(Object object);
@@ -25,5 +24,5 @@ public interface DBHandler {
 
     void commit();
     void startTransaction();
-    Object saveOrUpdate(Object object);
+
 }

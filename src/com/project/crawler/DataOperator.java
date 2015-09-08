@@ -62,7 +62,7 @@ public class DataOperator {
 
         games.forEach(g ->
         {
-            dbHandler.saveOrUpdate(g);
+            dbHandler.save(g);
         });
     }
 
@@ -85,7 +85,7 @@ public class DataOperator {
         stream.forEach(s->
         {
 
-            dbHandler.saveOrUpdate(s);
+            dbHandler.save(s);
         });
 
     }
