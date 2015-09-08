@@ -1,10 +1,13 @@
 package com.project.database;
 
+import com.project.model.Channel;
 import com.project.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
+import java.util.Date;
 
 /**
  * Created by arash on 08.09.2015.
@@ -40,43 +43,47 @@ public class UserServiceImpl
         return user;
     }
 
-    public void setEmail(String email){
+    public void setEmail(User user, String email){
+        user.setEmail(email);
+    }
+
+    public void uploadPicture(User user, String picLink){
+        user.setPicture(picLink);
+    }
+
+    public void setBirthday(User user, Date geburtstag){
+        user.setGeburtsTag(geburtstag);
+    }
+
+    public void followChannel(User user, Channel channel){
+        user.followChannel(channel);
+    }
+
+    public void subscribeChannel(User user, Channel channel){
+        user.subscribeChannel(channel);
+    }
+
+    public void deleteAccount(User user){
 
     }
 
-    public void uploadPicture(String picLink){
+    public void deleteHistory(User user){
 
     }
 
-    public void setBirthday(){
+    public void deleteFriend(User user, User friend){
 
     }
 
-    public boolean followChannel(){
+    public void addFriend(User user, User friend){
+
+    }
+
+    public boolean available(User user){
         return false;
     }
 
-    public boolean subscribeChannel(){
-        return false;
-    }
+    public void changePassword(User user, String password){
 
-    public void deleteAccount(){
-
-    }
-
-    public void deleteHistory(){
-
-    }
-
-    public void deleteFriend(){
-
-    }
-
-    public void addFriend(){
-
-    }
-
-    public boolean available(){
-        return false;
     }
 }

@@ -26,7 +26,7 @@ public class User {
     private String email;
     private String password;
     private String name;
-    private String vorName;
+    private String vorname;
     private int plattform;
     private Date geburtsTag;
     private ArrayList<Channel> followedChannels;
@@ -41,7 +41,97 @@ public class User {
         this.password = password;
     }
 
+    public int getUserID() {
+        return userID;
+    }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public int getPlattform() {
+        return plattform;
+    }
+
+    public void setPlattform(int plattform) {
+        this.plattform = plattform;
+    }
+
+    public Date getGeburtsTag() {
+        return geburtsTag;
+    }
+
+    public void setGeburtsTag(Date geburtsTag) {
+        this.geburtsTag = geburtsTag;
+    }
+
+    public ArrayList<Channel> getFollowedChannels() {
+        return followedChannels;
+    }
+
+    public void followChannel(Channel channel) {
+        this.followedChannels.add(channel);
+    }
+
+    public ArrayList<Channel> getSubscribedChannels() {
+        return subscribedChannels;
+    }
+
+    public void subscribeChannel(Channel channel) {
+        this.subscribedChannels.add(channel);
+    }
+
+    public ArrayList<Channel> getHistoryChannels() {
+        return historyChannels;
+    }
+
+    public void addToHistory(Channel channel) {
+        this.historyChannels.add(channel);
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     @Override
     public String toString(){
