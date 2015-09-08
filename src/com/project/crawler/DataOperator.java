@@ -85,7 +85,7 @@ public class DataOperator {
         stream.forEach(s->
         {
 
-            dbHandler.save(s);
+            dbHandler.saveOrUpdate(s);
         });
 
     }

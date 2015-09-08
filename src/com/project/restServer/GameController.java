@@ -20,24 +20,24 @@ public class GameController {
     GameService service = new GameServiceImpl(HibernateUtil.getSessionFactory());
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Game printGame(ModelMap model) {
+    public Game print(ModelMap model) {
         Game g = new Game("LoL",123);
         return g;
     }
     @RequestMapping(value = "/games", method = RequestMethod.GET)
-    public List<Game> getAllGames(ModelMap model) {
+    public List<Game> getAll(ModelMap model) {
         return service.getAllGames();
     }
     @RequestMapping(value = "/games/search/{prefix}", method = RequestMethod.GET)
-    public List<Game> getGamesByPrefix(@PathVariable("prefix") String prefix,ModelMap model) {
+    public List<Game> getByPrefix(@PathVariable("prefix") String prefix,ModelMap model) {
         return service.getGamesByPrefix(prefix);
     }
     @RequestMapping(value = "/games/top", method = RequestMethod.GET)
-    public List<Game> getTopGames(ModelMap model) {
+    public List<Game> getTop(ModelMap model) {
         return service.getTopGames(10);
     }
     @RequestMapping(value = "/games/{gameName}", method = RequestMethod.GET)
-    public Game getGame(@PathVariable("gameName") String gameName,ModelMap model) {
+    public Game get(@PathVariable("gameName") String gameName,ModelMap model) {
         return service.getGame(gameName);
     }
 }

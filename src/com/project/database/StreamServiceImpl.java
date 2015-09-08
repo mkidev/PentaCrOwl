@@ -18,7 +18,7 @@ public class StreamServiceImpl implements StreamService {
     private Transaction transaction;
     private SessionFactory sessionFactory;
 
-    public StreamServiceImpl() {
+    public StreamServiceImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
         this.session = sessionFactory.openSession();
 
