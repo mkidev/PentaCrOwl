@@ -43,12 +43,12 @@ public class DataOperator {
         dataOperator.saveGames();
         dbHandler.commit();
         dbHandler.closeSession();
-/*        dbHandler.startSession();
+       dbHandler.startSession();
         dbHandler.startTransaction();
         dataOperator.saveStream();
         dbHandler.commit();
         dbHandler.closeSession();
-        dbHandler.startSession();
+       /*  dbHandler.startSession();
         dbHandler.startTransaction();
         dataOperator.saveChannel();
         dbHandler.commit();
@@ -78,9 +78,10 @@ public class DataOperator {
 
         gameName.forEach(gn->
         {
-            stream.addAll(dataParser.parseStreams(gn,dataCrawler.getStreams(gn)));
+            stream.addAll(dataParser.parseStreams(gn, dataCrawler.getStreams(gn)));
+            
         });
-
+        System.out.println("stream.size() = " + stream.size());
         stream.forEach(s->
         {
 

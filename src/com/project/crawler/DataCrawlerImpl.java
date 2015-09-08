@@ -18,7 +18,7 @@ import java.util.Objects;
  * Created by arash on 06.09.2015.
  */
 public class DataCrawlerImpl implements DataCrawler {
-    DataOperator operator;
+    private boolean _responseCheck;
 
 
     public DataCrawlerImpl(){
@@ -28,7 +28,7 @@ public class DataCrawlerImpl implements DataCrawler {
 
 
     private String executeGet(String url) throws Exception {
-        String result;
+        String result="";
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -39,17 +39,30 @@ public class DataCrawlerImpl implements DataCrawler {
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL : " + url);
         System.out.println("Response Code : " + responseCode);
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+        if(responseCode == 200){
+            _responseCheck = true;
         }
-        result = response.toString();
-        in.close();
+        else
+        {
+            _responseCheck=false;
+        }
+        try {
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            result = response.toString();
+            in.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
 
         return result;
 
@@ -105,7 +118,10 @@ public class DataCrawlerImpl implements DataCrawler {
 
                 int rest = maxOffSet - offset;
                 try {
+                    if (_responseCheck)
+                    {
                     channels.add(executeGet(channelsGeneral + URLEncoder.encode(game) + streamsOffset + rest + ""));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -113,7 +129,10 @@ public class DataCrawlerImpl implements DataCrawler {
             }
             else {
                 try {
-                    channels.add(executeGet(channelsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                    if (_responseCheck)
+                    {
+                        channels.add(executeGet(channelsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -139,8 +158,11 @@ public class DataCrawlerImpl implements DataCrawler {
             if (maxOffSet - offset <= 100){
 
                 int rest = maxOffSet - offset;
+
                 try {
-                    streams.add(executeGet(streamsGeneral + URLEncoder.encode(game) + streamsOffset + rest + ""));
+                    if(_responseCheck) {
+                        streams.add(executeGet(streamsGeneral + URLEncoder.encode(game) + streamsOffset + rest + ""));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -148,7 +170,9 @@ public class DataCrawlerImpl implements DataCrawler {
             }
             else {
                 try {
-                    streams.add(executeGet(streamsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                    if (_responseCheck) {
+                        streams.add(executeGet(streamsGeneral + URLEncoder.encode(game) + streamsOffset + offset + ""));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
