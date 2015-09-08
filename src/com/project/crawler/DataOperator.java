@@ -43,7 +43,7 @@ public class DataOperator {
         dataOperator.saveGames();
         dbHandler.commit();
         dbHandler.closeSession();
-        dbHandler.startSession();
+/*        dbHandler.startSession();
         dbHandler.startTransaction();
         dataOperator.saveStream();
         dbHandler.commit();
@@ -52,7 +52,7 @@ public class DataOperator {
         dbHandler.startTransaction();
         dataOperator.saveChannel();
         dbHandler.commit();
-        dbHandler.closeSession();
+        dbHandler.closeSession();*/
         dbHandler.close();
     }
 

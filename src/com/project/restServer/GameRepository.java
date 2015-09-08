@@ -2,6 +2,9 @@ package com.project.restServer;
 
 import com.project.model.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Optional;
 
@@ -9,5 +12,5 @@ import java.util.Optional;
  * Created by Marcel Kisilowski on 08.09.15.
  */
 public interface GameRepository extends JpaRepository<Game, Long> {
-    Optional<Game> findByName(String name);
+    Optional<Game> findByName(@Param("name") String name);
 }

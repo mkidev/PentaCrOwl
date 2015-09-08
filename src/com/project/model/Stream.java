@@ -45,7 +45,6 @@ public class Stream {
         return source;
     }
 
-
     public void setSource(String source) {
         this.source = source;
     }
