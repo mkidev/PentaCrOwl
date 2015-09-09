@@ -21,7 +21,7 @@ public class GameController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Game print(ModelMap model) {
-        Game g = new Game("LoL",123);
+        Game g = new Game("LoL",123,"");
         return g;
     }
     @RequestMapping(value = "/games", method = RequestMethod.GET)

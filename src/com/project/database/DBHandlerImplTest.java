@@ -49,7 +49,7 @@ public class DBHandlerImplTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        testGame = new Game("League of Legends", 8888);
+        testGame = new Game("League of Legends", 8888, "");
     }
 
     @After

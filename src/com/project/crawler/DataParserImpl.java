@@ -56,6 +56,7 @@ public class DataParserImpl implements DataParser {
             for (int i = 0; i < jsonArray.length(); i++) {
                 String source = jsonArray.getJSONObject(i).getJSONObject("_links").getString("self");
                 String channel = jsonArray.getJSONObject(i).getJSONObject("channel").getString("name");
+                String preview = jsonArray.getJSONObject(i).getJSONObject("preview").getString("medium");
                 int viewers = jsonArray.getJSONObject(i).getInt("viewers");
 
                 //Greenwich time
@@ -71,9 +72,9 @@ public class DataParserImpl implements DataParser {
                     e.printStackTrace();
                 }
 
-                String previewPicture = jsonArray.getJSONObject(i).getJSONObject("preview").getString("template");
 
-                streams.add(new Stream(source, channel, game, viewers, createdAt, previewPicture));
+
+                streams.add(new Stream(source, channel, game, viewers, createdAt, preview));
             }
         });
 
@@ -84,15 +85,17 @@ public class DataParserImpl implements DataParser {
     public ArrayList<Game> parseGames(ArrayList<String> crawledGamesData) {
         ArrayList<Game> games = new ArrayList<Game>();
         crawledGamesData.forEach(string -> {
-
+            String preview;
             JSONObject jsonGames = new JSONObject(string);
             JSONArray jsonArray = jsonGames.getJSONArray("top");
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 String name = jsonArray.getJSONObject(i).getJSONObject("game").getString("name");
+                preview = jsonArray.getJSONObject(i).getJSONObject("game").getJSONObject("box").getString("large");
                 int viewers = jsonArray.getJSONObject(i).getInt("viewers");
 
-                games.add(new Game(name, viewers));
+
+                games.add(new Game(name, viewers, preview));
             }
         });
 

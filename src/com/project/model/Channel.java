@@ -23,6 +23,7 @@ public class Channel {
     private String source;
     private int views;
 
+
     public Channel()
     {
     }

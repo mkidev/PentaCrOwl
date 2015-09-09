@@ -20,15 +20,17 @@ public class Game {
     private long gameID;
     private final String name;
     private final int viewers;
+    private String preview;
 
     public Game() {
         name="";
         viewers=0;
     }
 
-    public Game(String name, int viewers) {
+    public Game(String name, int viewers, String preview) {
         this.name = name;
         this.viewers = viewers;
+        this.preview = preview;
     }
     public Game(String name, int viewers,long gameID) {
         this.gameID = gameID;
@@ -42,6 +44,15 @@ public class Game {
 
     public int getViewers() {
         return viewers;
+    }
+
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 
     @Override
