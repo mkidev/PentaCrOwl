@@ -84,17 +84,21 @@ public class DataParserImpl implements DataParser {
 
     public ArrayList<Game> parseGames(ArrayList<String> crawledGamesData) {
         ArrayList<Game> games = new ArrayList<Game>();
+        String width = "-280x";
+        String height = "180.jpg";
         crawledGamesData.forEach(string -> {
-            String preview;
+
             JSONObject jsonGames = new JSONObject(string);
             JSONArray jsonArray = jsonGames.getJSONArray("top");
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 String name = jsonArray.getJSONObject(i).getJSONObject("game").getString("name");
-                preview = jsonArray.getJSONObject(i).getJSONObject("game").getJSONObject("box").getString("large");
+                String preview = jsonArray.getJSONObject(i).getJSONObject("game").getJSONObject("box").getString("template");
+                preview = preview.substring(0, preview.lastIndexOf("-"));
+                preview = preview + width + height;
                 int viewers = jsonArray.getJSONObject(i).getInt("viewers");
 
-
+                System.out.println("preview = " + preview);
                 games.add(new Game(name, viewers, preview));
             }
         });

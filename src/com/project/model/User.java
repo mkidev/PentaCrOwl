@@ -26,8 +26,6 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
     private String name;
     private String vorname;
@@ -39,6 +37,9 @@ public class User {
     private ArrayList<Channel> subscribedChannels;
     private ArrayList<Channel> historyChannels;
 
+    public User(){
+
+    }
 
     public User(String nickName, String userName, String email, String password){
         this.nickName = nickName;
@@ -75,13 +76,7 @@ public class User {
         this.password = password;
     }
 
-    public Set<UserRole> getUserRole() {
-        return userRole;
-    }
 
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
-    }
 
     public String getName() {
         return name;

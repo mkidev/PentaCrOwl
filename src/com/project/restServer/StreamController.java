@@ -21,7 +21,7 @@ import java.util.List;
 public class StreamController {
     StreamService service = new StreamServiceImpl(HibernateUtil.getSessionFactory());
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/arash", method = RequestMethod.GET)
     public Stream print(ModelMap model) {
         Stream stream = new Stream();
         return stream;

@@ -34,6 +34,8 @@ public class UserServiceImpl implements UserService
     }
 
 
+
+
     public User getUser(String userName){
         User user = (User) session.createCriteria(User.class).add(Restrictions.like("userName", userName)).uniqueResult();
         return user;
