@@ -2,12 +2,16 @@ package com.project.database;
 
 import com.project.model.Channel;
 import com.project.model.User;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
 
 /**
  * Created by arash on 08.09.2015.
@@ -51,6 +55,14 @@ public class UserServiceImpl implements UserService
         return user;
     }
 
+    public int getNickAmount(String nickName)
+    {
+        List<User> user = new ArrayList<User>();
+        Criteria crit = session.createCriteria(User.class).add(Restrictions.like("nickName", nickName));
+        user = crit.list();
+
+        return user.size() + 1;
+    }
 
     public void setEmail(User user, String email){
         user.setEmail(email);

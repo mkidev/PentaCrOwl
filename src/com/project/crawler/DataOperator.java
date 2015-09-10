@@ -41,15 +41,16 @@ public class DataOperator {
     public static void main(String[] args){
         int NUM_THREADS = 8;
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(NUM_THREADS);
+        DataOperator operator = new DataOperator();
 
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 System.out.println("executed");
-                DataOperator operator = new DataOperator();
+
                 operator.operate();
             }
-        }, 0, 3, TimeUnit.MINUTES);
+        }, 0, 1, TimeUnit.MINUTES);
     }
 
     public void operate(){

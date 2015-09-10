@@ -60,6 +60,15 @@ public class User {
         return nickName;
     }
 
+    public void setNickName(String nickName)
+    {
+        this.nickName= nickName;
+    }
+    public void setUserName(String nickName)
+    {
+        this.userName=userName;
+    }
+
     public String getEmail() {
         return email;
     }
