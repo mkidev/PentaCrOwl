@@ -41,20 +41,18 @@ public class DataOperator {
     public static void main(String[] args){
         int NUM_THREADS = 8;
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(NUM_THREADS);
-        DataOperator operator = new DataOperator();
-        scheduler.scheduleAtFixedRate(new Runnable() {
 
+        scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                System.out.println("periodicAction: next iteration started");
+                System.out.println("executed");
+                DataOperator operator = new DataOperator();
                 operator.operate();
-                System.out.println("periodicAction: iteration is done");
             }
-        }, 0, 1, TimeUnit.MINUTES);
+        }, 0, 3, TimeUnit.MINUTES);
     }
 
     public void operate(){
-        System.out.println("operate: DBHandler will operate");
         DataOperator dataOperator = new DataOperator();
         dbHandler.startSession();
         dbHandler.startTransaction();
@@ -74,7 +72,6 @@ public class DataOperator {
         dbHandler.commit();
         dbHandler.closeSession();*/
         dbHandler.close();
-        System.out.println("operate: DBHandler closed");
     }
 
     public void saveGames(){

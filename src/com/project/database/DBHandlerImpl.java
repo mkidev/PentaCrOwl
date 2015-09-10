@@ -108,6 +108,8 @@ public class DBHandlerImpl implements DBHandler {
         return result;
     }
 
+
+
     @Override
     public void close() {
         sessionFactory.close();

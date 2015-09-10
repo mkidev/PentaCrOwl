@@ -30,4 +30,5 @@ public interface UserService
 
     public void deleteHistory(User user);
     public boolean available(User user);
+    public int getNickAmount(String nickName);
 }

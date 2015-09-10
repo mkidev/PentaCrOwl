@@ -12,6 +12,6 @@ public interface LoginService  {
     Void logout(User user);
     Void register(String email, String nickName, String password, Date date);
     Void passwordForgot(String email);
-    boolean authenticate(String creds);
+
 
 }
