@@ -9,6 +9,8 @@ import com.project.model.Stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.concurrent.*;
 
 /**
  * Created by Marcel Kisilowski on 06.09.15.
@@ -37,17 +39,33 @@ public class DataOperator {
         dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory());
     }
     public static void main(String[] args){
+        int NUM_THREADS = 8;
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(NUM_THREADS);
+
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("executed");
+                DataOperator operator = new DataOperator();
+                operator.operate();
+            }
+        }, 0, 3, TimeUnit.MINUTES);
+    }
+
+    public void operate(){
         DataOperator dataOperator = new DataOperator();
         dbHandler.startSession();
         dbHandler.startTransaction();
         dataOperator.saveGames();
         dbHandler.commit();
         dbHandler.closeSession();
-       dbHandler.startSession();
+
+        /*dbHandler.startSession();
         dbHandler.startTransaction();
         dataOperator.saveStream();
         dbHandler.commit();
-        dbHandler.closeSession();
+        dbHandler.closeSession();*/
+
        /*  dbHandler.startSession();
         dbHandler.startTransaction();
         dataOperator.saveChannel();
