@@ -37,7 +37,7 @@ public class StreamServiceImpl implements StreamService {
 
     @Override
     public List<Stream> getTopStreams(int amount) {
-        List<Stream> streams = session.createCriteria(Stream.class).addOrder(Order.desc("game")).setMaxResults(amount).list();
+        List<Stream> streams = session.createCriteria(Stream.class).addOrder(Order.desc("viewers")).setMaxResults(amount).list();
         return streams;
     }
 
