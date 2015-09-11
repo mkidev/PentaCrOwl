@@ -6,6 +6,7 @@ import com.project.database.DBHandlerImpl;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class DataOperator {
         dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory());
     }
     public static void main(String[] args){
-        int NUM_THREADS = 8;
+        /*int NUM_THREADS = 8;
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(NUM_THREADS);
 
         scheduler.scheduleAtFixedRate(new Runnable() {
@@ -49,9 +50,12 @@ public class DataOperator {
                 DataOperator operator = new DataOperator();
                 operator.operate();
             }
-        }, 0, 3, TimeUnit.MINUTES);
+        }, 0, 3, TimeUnit.MINUTES);*/
+        DataOperator operator = new DataOperator();
+        operator.operate();
     }
 
+    @Scheduled(fixedDelay = 60000)
     public void operate(){
         DataOperator dataOperator = new DataOperator();
         dbHandler.startSession();
