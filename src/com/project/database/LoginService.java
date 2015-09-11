@@ -10,7 +10,6 @@ import java.util.Date;
 public interface LoginService  {
     Void login(String userName, String password);
     Void logout(User user);
-    Void register(String email, String nickName, String password, Date date);
     Void passwordForgot(String email);
 
 

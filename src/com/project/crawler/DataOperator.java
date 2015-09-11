@@ -3,10 +3,12 @@ package com.project.crawler;
 import com.project.crawler.util.HibernateUtil;
 import com.project.database.DBHandler;
 import com.project.database.DBHandlerImpl;
+import com.project.database.GameService;
+import com.project.database.GameServiceImpl;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.TaskScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class DataOperator {
     private static DataCrawler dataCrawler;
     private static DataParser dataParser;
     private static DBHandler dbHandler;
+    private static GameService gameService;
     private ArrayList<String> crawledGamesData = new ArrayList<>();
 
     public DataParser getDataParser() {
@@ -38,44 +41,54 @@ public class DataOperator {
         dataCrawler = new DataCrawlerImpl();
         dataParser = new DataParserImpl(dataCrawler);
         dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory());
+        gameService = new GameServiceImpl(HibernateUtil.getSessionFactory());
+
     }
     public static void main(String[] args){
-        /*int NUM_THREADS = 8;
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(NUM_THREADS);
 
-        scheduler.scheduleAtFixedRate(new Runnable() {
+
+        Runnable runnable = new Runnable(){
+
+            DataOperator dataOperator = new DataOperator();
+
             @Override
             public void run() {
-                System.out.println("executed");
-                DataOperator operator = new DataOperator();
-                operator.operate();
-            }
-        }, 0, 3, TimeUnit.MINUTES);*/
-        DataOperator operator = new DataOperator();
-        operator.operate();
-    }
 
-    @Scheduled(fixedDelay = 60000)
-    public void operate(){
-        DataOperator dataOperator = new DataOperator();
-        dbHandler.startSession();
-        dbHandler.startTransaction();
-        dataOperator.saveGames();
-        dbHandler.commit();
-        dbHandler.closeSession();
+                System.out.println("executed");
+                dbHandler.startSession();
+                dbHandler.startTransaction();
+                dataOperator.saveGames();
+                dbHandler.commit();
+                dbHandler.closeSession();
+                System.out.println("crowdone");
+                dbHandler.close();
+                //gameService.flushGames();
+
+
 
         /*dbHandler.startSession();
         dbHandler.startTransaction();
-        dataOperator.saveStream();
+        this.saveStream();
         dbHandler.commit();
         dbHandler.closeSession();*/
 
        /*  dbHandler.startSession();
         dbHandler.startTransaction();
-        dataOperator.saveChannel();
+        this.saveChannel();
         dbHandler.commit();
         dbHandler.closeSession();*/
-        dbHandler.close();
+
+                System.out.println("done3");
+                System.out.println("done");}
+
+
+        };
+
+       ScheduledExecutorService service = Executors
+                .newSingleThreadScheduledExecutor();
+        service.scheduleWithFixedDelay(runnable, 0, 30, TimeUnit.SECONDS);
+
+
     }
 
     public void saveGames(){

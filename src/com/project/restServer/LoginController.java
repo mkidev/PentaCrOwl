@@ -3,6 +3,7 @@ package com.project.restServer;
 import com.project.crawler.util.HibernateUtil;
 import com.project.database.LoginService;
 import com.project.database.LoginServiceImpl;
+import com.project.database.RegisterService;
 import com.project.model.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +17,7 @@ import java.util.Date;
 @RestController
 public class LoginController {
     LoginService service = new LoginServiceImpl(HibernateUtil.getSessionFactory());
-
+    RegisterService reService = new RegisterService();
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public void login(String creds){
@@ -33,7 +34,7 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public void register(String email, String nickName, String password,Date date){
-        service.register(email, nickName, password, date);
+        reService.register(email, nickName, password, date);
     }
 
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)

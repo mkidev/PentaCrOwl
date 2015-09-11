@@ -39,10 +39,6 @@ public class LoginServiceImpl  implements LoginService {
         return null;
     }
 
-    @Override
-    public Void register(String email, String nickName, String password, Date date) {
-        return null;
-    }
 
     @Override
     public Void passwordForgot(String email) {

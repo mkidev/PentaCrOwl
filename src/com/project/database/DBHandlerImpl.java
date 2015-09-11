@@ -1,6 +1,6 @@
 package com.project.database;
 
-import com.project.crawler.util.HibernateUtil;
+
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.io.Serializable;
-import java.util.Objects;
+
 
 /**
  * Created by Marcel Kisilowski on 06.09.15.
