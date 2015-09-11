@@ -51,8 +51,10 @@ public class DataOperator {
                 operator.operate();
             }
         }, 0, 3, TimeUnit.MINUTES);*/
+        System.out.println("haha");
         DataOperator operator = new DataOperator();
         operator.operate();
+        System.out.println("hihi");
     }
 
     @Scheduled(fixedDelay = 60000)
