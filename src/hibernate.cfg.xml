@@ -21,9 +21,9 @@
         <property name="connection.pool_size">5</property>
         <property name="current_session_context_class">thread</property>
 
-        <mapping class="com.project.model.User" />
-        <mapping class="com.project.model.Channel" />
-        <mapping class="com.project.model.Stream" />
-        <mapping class="com.project.model.Game" />
+        <mapping class="main.com.project.model.User"/>
+        <mapping class="main.com.project.model.Channel"/>
+        <mapping class="main.com.project.model.Stream"/>
+        <mapping class="main.com.project.model.Game"/>
     </session-factory>
 </hibernate-configuration>
