@@ -40,31 +40,40 @@ public class DataOperator {
         dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory());
     }
     public static void main(String[] args){
-        /*int NUM_THREADS = 8;
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(NUM_THREADS);
+        System.out.println("main: Anfang");
+        final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        DataOperator operator = new DataOperator();
 
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                System.out.println("executed");
-                DataOperator operator = new DataOperator();
+                System.out.println("Runnable: Anfang");
                 operator.operate();
+                System.out.println("Runnable: Ende");
             }
-        }, 0, 3, TimeUnit.MINUTES);*/
-        System.out.println("haha");
+        }, 0, 1, TimeUnit.MINUTES);
+        System.out.println("main: Ende");
+
+        /*System.out.println("main no.1");
         DataOperator operator = new DataOperator();
         operator.operate();
-        System.out.println("hihi");
+        System.out.println("main no.2");*/
     }
 
     @Scheduled(fixedDelay = 60000)
     public void operate(){
+        System.out.println("operate: Anfang");
         DataOperator dataOperator = new DataOperator();
         dbHandler.startSession();
+        System.out.println("operate: Session gestartet");
         dbHandler.startTransaction();
+        System.out.println("operate: Transaction gestartet");
         dataOperator.saveGames();
+        System.out.println("operate: alle Spiele geholt");
         dbHandler.commit();
+        System.out.println("operate: commit");
         dbHandler.closeSession();
+        System.out.println("operate: Session beendet");
 
         /*dbHandler.startSession();
         dbHandler.startTransaction();
@@ -78,6 +87,7 @@ public class DataOperator {
         dbHandler.commit();
         dbHandler.closeSession();*/
         dbHandler.close();
+        System.out.println("operate: Ende");
     }
 
     public void saveGames(){
