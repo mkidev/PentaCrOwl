@@ -15,7 +15,7 @@ public interface DBHandler {
     void closeSession();
     boolean checkExists(Object object);
     void close();
-
+    public void setTl();
     <T> Object get(Class<T> gameClass, Serializable aLong);
     Game getGameByName(String name);
     Stream getStreamByName(String name);

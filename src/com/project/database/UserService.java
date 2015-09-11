@@ -31,4 +31,5 @@ public interface UserService
     public void deleteHistory(User user);
     public boolean available(User user);
     public int getNickAmount(String nickName);
+    public void register(String nickName, String password, String email,Date date);
 }

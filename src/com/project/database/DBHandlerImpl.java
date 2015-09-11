@@ -4,6 +4,7 @@ package com.project.database;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
+import com.project.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,11 +20,17 @@ public class DBHandlerImpl implements DBHandler {
     private Session session;
     private SessionFactory sessionFactory;
     private Transaction transaction;
+    private static ThreadLocal<Session> threadLocal  = new ThreadLocal<Session>();
+
 
     public DBHandlerImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    public void setTl()
+    {
+        threadLocal.set(session);
+    }
     public void startSession() {
         session = sessionFactory.openSession();
     }
@@ -99,6 +106,12 @@ public class DBHandlerImpl implements DBHandler {
                 Stream streamToCheck = (Stream) object;
                 Stream stream = (Stream) session.createCriteria(Stream.class).add(Restrictions.eq("channel", streamToCheck.getChannel())).uniqueResult();
                 if(stream!=null) {
+                    result = true;
+                }
+            } else if (object instanceof User) {
+                User userToCheck = (User) object;
+               User user = (User) session.createCriteria(Stream.class).add(Restrictions.eq("channel", userToCheck.getUserName())).uniqueResult();
+                if(user!=null) {
                     result = true;
                 }
             }

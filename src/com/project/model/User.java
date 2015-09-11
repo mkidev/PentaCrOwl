@@ -26,7 +26,6 @@ public class User {
     private String email;
     private String password;
 
-
     private String name;
     private String vorname;
     private int plattform;
@@ -64,7 +63,7 @@ public class User {
     {
         this.nickName= nickName;
     }
-    public void setUserName(String nickName)
+    public void setUserName(String userName)
     {
         this.userName=userName;
     }

@@ -18,9 +18,12 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService
 {
+    User user = new User();
     private Session session;
     private Transaction transaction;
     private SessionFactory sessionFactory;
+    DBHandler dbHandler;
+    String userName;
 
     public UserServiceImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -36,9 +39,6 @@ public class UserServiceImpl implements UserService
     public void deleteAccount(User user){
 
     }
-
-
-
 
     public User getUser(String userName){
         User user = (User) session.createCriteria(User.class).add(Restrictions.like("userName", userName)).uniqueResult();
@@ -64,6 +64,19 @@ public class UserServiceImpl implements UserService
         return user.size() + 1;
     }
 
+    public boolean checkIfUserExists(String userName)
+    {
+        List<User> user = new ArrayList<User>();
+        boolean check = false;
+        Criteria crit = session.createCriteria(User.class).add(Restrictions.like("userName", userName));
+        user = crit.list();
+        if(user.size() != 0)
+        {
+            check = true;
+        }
+        return check;
+    }
+
     public void setEmail(User user, String email){
         user.setEmail(email);
     }
@@ -79,7 +92,6 @@ public class UserServiceImpl implements UserService
     public void changePassword(User user, String password){
 
     }
-
 
     public void followChannel(User user, Channel channel){
         user.followChannel(channel);
@@ -105,5 +117,37 @@ public class UserServiceImpl implements UserService
 
     public boolean available(User user){
         return false;
+    }
+
+    @Override
+    public void register(String nickName, String password, String email,Date date) {
+        user.setEmail(email);
+        user.setGeburtstag(date);
+        user.setPassword(password);
+        user.setNickName(nickName);
+        boolean available = true;
+
+
+        int usersize = getNickAmount(nickName);
+        if (usersize < 10000) {
+            int i = (int) (Math.random() * 8999) + 1000;
+            while (available) {
+                userName = nickName + "~" + i;
+                i = (int) (Math.random() * 8999) + 1000;
+                available = checkIfUserExists(userName) && i < 10000;
+            }
+        } else {
+            int i = (int) (Math.random() * 10000) + 10000;
+
+            while (available) {
+                userName = nickName + "~" + i;
+                i = (int) (Math.random() * 10000) + 10000;
+                available = checkIfUserExists(userName) && i < 20000;
+            }
+        }
+        user.setUserName(userName);
+        transaction = session.beginTransaction();
+        session.save(user);
+        transaction.commit();
     }
 }

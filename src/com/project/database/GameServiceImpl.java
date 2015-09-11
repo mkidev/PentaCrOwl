@@ -15,6 +15,7 @@ public class GameServiceImpl implements GameService {
     private Session session;
     private Transaction transaction;
     private SessionFactory sessionFactory;
+
     public GameServiceImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
         this.session = sessionFactory.openSession();
@@ -46,9 +47,10 @@ public class GameServiceImpl implements GameService {
     @Override
     public void flushGames()
     {
-        System.out.println("primel");
+        transaction = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("DELETE FROM game");
         query.executeUpdate();
+        transaction.commit();
         /*SQLQuery createTable = session.createSQLQuery("CREATE TABLE game(gameID BIGINT,name VARCHAR(255),preview VARCHAR(255), viewers INT,PRIMARY KEY (gameID))");
         createTable.executeUpdate();*/
     }
