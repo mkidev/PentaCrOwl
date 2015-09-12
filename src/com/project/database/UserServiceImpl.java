@@ -1,11 +1,9 @@
 package com.project.database;
 
+import com.project.crawler.util.HibernateUtil;
 import com.project.model.Channel;
 import com.project.model.User;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -18,26 +16,29 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService
 {
-    User user = new User();
+    private User user = new User();
     private Session session;
     private Transaction transaction;
     private SessionFactory sessionFactory;
-    DBHandler dbHandler;
-    String userName;
+    private DBHandler dbHandler;
 
     public UserServiceImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
         this.session = sessionFactory.openSession();
+        dbHandler = new DBHandlerImpl(sessionFactory);
     }
 
 
     public User newUser(String nickName, String userName, String email, String password){
-        User user = new User(nickName, userName, email, password);
-        return user;
+        User nUser = new User(nickName, userName, email, password);
+        return nUser;
     }
 
-    public void deleteAccount(User user){
-
+    public void deleteAccount(String userName){
+        transaction = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("DELETE FROM user WHERE userName=" + userName);
+        query.executeUpdate();
+        transaction.commit();
     }
 
     public User getUser(String userName){
@@ -77,8 +78,10 @@ public class UserServiceImpl implements UserService
         return check;
     }
 
-    public void setEmail(User user, String email){
+    public void setEmail(String username, String email){
+        User user = getUser(username);
         user.setEmail(email);
+        dbHandler.save(user);
     }
 
     public void uploadPicture(User user, String picLink){
@@ -121,6 +124,7 @@ public class UserServiceImpl implements UserService
 
     @Override
     public void register(String nickName, String password, String email,Date date) {
+        String userName = "";
         user.setEmail(email);
         user.setGeburtstag(date);
         user.setPassword(password);

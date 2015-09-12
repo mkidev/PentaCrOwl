@@ -21,16 +21,20 @@ public class DataOperator {
     private ArrayList<String> crawledGamesData = new ArrayList<>();
     private static GameService gameService;
 
+    private static UserService userService;
+
     public DataOperator() {
         dataCrawler = new DataCrawlerImpl();
         dataParser = new DataParserImpl(dataCrawler);
         dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory());
         gameService = new GameServiceImpl(HibernateUtil.getSessionFactory());
 
+        userService = new UserServiceImpl(HibernateUtil.getSessionFactory());
     }
 
     public static void main(String[] args){
-        final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        userService.setEmail("lukas248~4357", "newEmail");
+        /*final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         DataOperator operator = new DataOperator();
 
         scheduler.scheduleAtFixedRate(new Runnable() {
@@ -39,7 +43,7 @@ public class DataOperator {
             public void run() {
                 operator.operate();
             }
-        }, 0, 5, TimeUnit.MINUTES);
+        }, 0, 5, TimeUnit.MINUTES);*/
     }
 
     public void operate(){

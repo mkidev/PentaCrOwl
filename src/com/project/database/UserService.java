@@ -11,13 +11,13 @@ import java.util.Date;
 public interface UserService
 {
     public User newUser(String nickName, String userName, String email, String password);
-    public void deleteAccount(User user);
+    public void deleteAccount(String userName);
 
     public User getUser(String userName);
     public User getNick(String nickName);
     public User getName(String name);
 
-    public void setEmail(User user, String email);
+    public void setEmail(String userName, String email);
     public void uploadPicture(User user, String picLink);
     public void setBirthday(User user, Date geburtstag);
     public void changePassword(User user, String password);
