@@ -1,7 +1,7 @@
 package com.project.restServer;
 
 
-import com.project.crawler.util.HibernateUtil;
+import com.project.database.util.HibernateUtil;
 import com.project.database.GameService;
 import com.project.database.GameServiceImpl;
 import com.project.model.Game;

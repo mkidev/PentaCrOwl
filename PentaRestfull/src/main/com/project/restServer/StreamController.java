@@ -1,6 +1,6 @@
 package com.project.restServer;
 
-import com.project.crawler.util.HibernateUtil;
+import com.project.database.util.HibernateUtil;
 import com.project.database.StreamService;
 import com.project.database.StreamServiceImpl;
 import com.project.model.Stream;

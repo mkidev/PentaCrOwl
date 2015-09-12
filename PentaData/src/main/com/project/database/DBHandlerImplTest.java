@@ -1,6 +1,6 @@
 package com.project.database;
 
-import com.project.crawler.util.HibernateUtil;
+import com.project.database.util.HibernateUtil;
 import com.project.model.Game;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
