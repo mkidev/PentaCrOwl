@@ -100,4 +100,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+### Hibernate
+hibernate.cfg.xml
+
 
