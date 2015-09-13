@@ -15,4 +15,5 @@ public interface GameService {
     List<Game> getTopGames(int amount);
 
     List<Game> getGamesByPrefix(String prefix);
+    public void flushGames();
 }
