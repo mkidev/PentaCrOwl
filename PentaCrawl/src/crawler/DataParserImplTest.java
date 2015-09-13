@@ -1,6 +1,6 @@
 package crawler;
 
-import main.com.project.model.Game;
+import com.project.model.Game;
 import org.junit.Ignore;
 import org.junit.Test;
 

@@ -1,11 +1,11 @@
 package crawler;
 
 import crawler.util.HibernateUtil;
-import main.com.project.database.DBHandler;
-import main.com.project.database.DBHandlerImpl;
-import main.com.project.model.Channel;
-import main.com.project.model.Game;
-import main.com.project.model.Stream;
+import com.project.database.DBHandler;
+import com.project.database.DBHandlerImpl;
+import com.project.model.Channel;
+import com.project.model.Game;
+import com.project.model.Stream;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package crawler;
 
-import main.com.project.model.Channel;
-import main.com.project.model.Game;
-import main.com.project.model.Stream;
+import com.project.model.Channel;
+import com.project.model.Game;
+import com.project.model.Stream;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
