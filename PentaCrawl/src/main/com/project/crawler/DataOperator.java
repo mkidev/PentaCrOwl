@@ -77,8 +77,7 @@ public class DataOperator {
         dbHandler.closeSession();
         */
 
-        // TODO
-        // dbHandler.close();
+        // TODO dbHandler.close();
     }
 
     public void saveGames() {
