@@ -20,7 +20,6 @@ public interface DBHandler {
     boolean checkExists(Object object);
 
     void close();
-    public void setTl();
     <T> Object get(Class<T> gameClass, Serializable aLong);
 
     Game getGameByName(String name);
