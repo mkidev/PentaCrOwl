@@ -2,14 +2,11 @@ package com.project.crawler;
 
 import com.project.database.*;
 import com.project.database.util.HibernateUtil;
-import com.project.database.DBHandler;
-import com.project.database.DBHandlerImpl;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +32,6 @@ public class DataOperator {
         dataCrawler = new DataCrawlerImpl();
         dataParser = new DataParserImpl(dataCrawler);
         gameService = new GameServiceImpl(HibernateUtil.getSessionFactory());
-
-
-
     }
 
     public static void main(String[] args) {
@@ -49,7 +43,7 @@ public class DataOperator {
             public void run() {
                 dataOperator.operate();
             }
-        }, 0,1, TimeUnit.MINUTES);
+        }, 0, 5, TimeUnit.MINUTES);
     }
 
     public void operate(){
@@ -57,20 +51,25 @@ public class DataOperator {
         {
             saveGames();
             session.close();
-            sessionFactory.openSession();
+
+            /*
+            session = sessionFactory.openSession();
             saveStream();
             session.close();
+            */
         }
         else
         {
-            sessionFactory.openSession();
+            session = sessionFactory.openSession();
             saveGames();
             session.close();
-            sessionFactory.openSession();
+
+            /*
+            session = sessionFactory.openSession();
             saveStream();
             session.close();
+            */
         }
-
 
         // TODO dbHandler.close();
     }
@@ -81,11 +80,9 @@ public class DataOperator {
         gameService.beginTransaction();
         games.forEach(g ->
         {
-
             gameService.save(g);
-
-
         });
+
         gameService.commitTransaction();
     }
 
@@ -110,7 +107,9 @@ public class DataOperator {
         {
 
             gameService.save(s);
-        });gameService.commitTransaction();
+        });
+
+        gameService.commitTransaction();
 
     }
 
