@@ -22,6 +22,22 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public void beginTransaction()
+    {
+
+        transaction = session.beginTransaction();
+    }
+    @Override
+    public void commitTransaction()
+    {
+        transaction.commit();
+    }
+    @Override
+    public Transaction getTransaction()
+    {
+        return transaction;
+    }
+    @Override
     public List<Game> getAllGames() {
         List games = session.createCriteria(Game.class).list();
         return games;
@@ -31,6 +47,11 @@ public class GameServiceImpl implements GameService {
     public Game getGame(String gameName) {
         Game game = (Game) session.createCriteria(Game.class).add(Restrictions.like("name", gameName)).uniqueResult();
         return game;
+    }
+    @Override
+    public Object save(Object object) {
+        session.save(object);
+        return object;
     }
 
     @Override
@@ -48,11 +69,11 @@ public class GameServiceImpl implements GameService {
     @Override
     public void flushGames()
     {
-        transaction = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("DELETE FROM game");
         query.executeUpdate();
         transaction.commit();
         /*SQLQuery createTable = session.createSQLQuery("CREATE TABLE game(gameID BIGINT,name VARCHAR(255),preview VARCHAR(255), viewers INT,PRIMARY KEY (gameID))");
         createTable.executeUpdate();*/
     }
+
 }

@@ -58,6 +58,11 @@ public class UserServiceImpl implements UserService {
         transaction.commit();
     }
 
+    @Override
+    public Object save(Object object) {
+        session.save(object);
+        return object;
+    }
 
     public User getUser(String userName) {
         User user = (User) session.createCriteria(User.class).add(Restrictions.like("userName", userName)).uniqueResult();

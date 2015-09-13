@@ -1,6 +1,8 @@
 package com.project.database;
 
 import com.project.model.Game;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -16,4 +18,8 @@ public interface GameService {
 
     List<Game> getGamesByPrefix(String prefix);
     public void flushGames();
+    public Object save(Object object);
+    public Transaction getTransaction();
+    public void commitTransaction();
+    public void beginTransaction();
 }

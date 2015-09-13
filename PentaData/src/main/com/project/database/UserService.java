@@ -38,4 +38,6 @@ public interface UserService {
     void deleteHistory(User user);
 
     boolean available(User user);
+
+    public Object save(Object object);
 }

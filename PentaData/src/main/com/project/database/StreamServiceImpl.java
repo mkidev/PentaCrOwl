@@ -29,6 +29,11 @@ public class StreamServiceImpl implements StreamService {
         List<Stream> streams = session.createCriteria(Stream.class).list();
         return streams;
     }
+    @Override
+    public Object save(Object object) {
+        session.save(object);
+        return object;
+    }
 
     @Override
     public List<Stream> getStreamsByGame(String game) {

@@ -2,9 +2,14 @@ package com.project.crawler;
 
 import com.project.database.*;
 import com.project.database.util.HibernateUtil;
+import com.project.database.DBHandler;
+import com.project.database.DBHandlerImpl;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,19 +23,21 @@ import java.util.concurrent.TimeUnit;
 public class DataOperator {
     private static DataCrawler dataCrawler;
     private static DataParser dataParser;
-    private static DBHandler dbHandler;
     private ArrayList<String> crawledGamesData = new ArrayList<>();
-
     private static GameService gameService;
-    private static UserService userService;
+    private SessionFactory sessionFactory;
+    private Session session;
+
 
     public DataOperator() {
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.getCurrentSession();
         dataCrawler = new DataCrawlerImpl();
         dataParser = new DataParserImpl(dataCrawler);
-        dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory());
-
         gameService = new GameServiceImpl(HibernateUtil.getSessionFactory());
-        userService = new UserServiceImpl(HibernateUtil.getSessionFactory());
+
+
+
     }
 
     public static void main(String[] args) {
@@ -42,29 +49,28 @@ public class DataOperator {
             public void run() {
                 dataOperator.operate();
             }
-        }, 0, 5, TimeUnit.MINUTES);
+        }, 0,1, TimeUnit.MINUTES);
     }
 
     public void operate(){
-        dbHandler.startSession();
-        dbHandler.startTransaction();
-        saveGames();
-        dbHandler.commit();
-        dbHandler.closeSession();
+        if (session.isOpen())
+        {
+            saveGames();
+            session.close();
+            sessionFactory.openSession();
+            saveStream();
+            session.close();
+        }
+        else
+        {
+            sessionFactory.openSession();
+            saveGames();
+            session.close();
+            sessionFactory.openSession();
+            saveStream();
+            session.close();
+        }
 
-        /*
-        dbHandler.startSession();
-        dbHandler.startTransaction();
-        saveStream();
-        dbHandler.commit();
-        dbHandler.closeSession();
-
-        dbHandler.startSession();
-        dbHandler.startTransaction();
-        saveChannel();
-        dbHandler.commit();
-        dbHandler.closeSession();
-        */
 
         // TODO dbHandler.close();
     }
@@ -72,17 +78,22 @@ public class DataOperator {
     public void saveGames() {
         List<Game> games = new ArrayList<Game>();
         games = dataParser.parseGames(getCrawledGamesData());
-
+        gameService.beginTransaction();
         games.forEach(g ->
         {
-            dbHandler.save(g);
+
+            gameService.save(g);
+
+
         });
+        gameService.commitTransaction();
     }
 
     public void saveStream() {
         List<Game> game = new ArrayList<Game>();
         List<Stream> stream = new ArrayList<Stream>();
         List<String> gameName = new ArrayList<String>();
+        gameService.beginTransaction();
         game = dataParser.parseGames(getCrawledGamesData());
         game.forEach(g ->
         {
@@ -98,8 +109,8 @@ public class DataOperator {
         stream.forEach(s ->
         {
 
-            dbHandler.save(s);
-        });
+            gameService.save(s);
+        });gameService.commitTransaction();
 
     }
 
@@ -120,7 +131,7 @@ public class DataOperator {
 
         channel.forEach(ch ->
         {
-            dbHandler.save(ch);
+            gameService.save(ch);
         });
     }
 
@@ -133,10 +144,6 @@ public class DataOperator {
         return dataCrawler;
     }
 
-    public DBHandler getDbHandler() {
-
-        return dbHandler;
-    }
 
     private ArrayList<String> getCrawledGamesData() {
         if (crawledGamesData.isEmpty()) {
