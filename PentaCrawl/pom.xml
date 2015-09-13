@@ -8,7 +8,6 @@
     <artifactId>PentaCrawl</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
-
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
