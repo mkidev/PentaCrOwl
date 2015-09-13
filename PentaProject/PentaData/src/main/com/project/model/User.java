@@ -105,7 +105,7 @@ public class User {
         this.geburtstag = geburtstag;
     }
 
-    public ArrayList<Channel> getFollowedChannels() {
+    public ArrayList<com.project.model.Channel> getFollowedChannels() {
         return followedChannels;
     }
 
