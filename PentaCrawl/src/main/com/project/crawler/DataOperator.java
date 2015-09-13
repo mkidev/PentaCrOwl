@@ -24,18 +24,6 @@ public class DataOperator {
     private static GameService gameService;
     private static UserService userService;
 
-    public DataParser getDataParser() {
-        return dataParser;
-    }
-
-    public DataCrawler getDataCrawler() {
-        return dataCrawler;
-    }
-
-    public DBHandler getDbHandler() {
-        return dbHandler;
-    }
-
     public DataOperator() {
         dataCrawler = new DataCrawlerImpl();
         dataParser = new DataParserImpl(dataCrawler);
@@ -56,6 +44,7 @@ public class DataOperator {
             }
         }, 0, 5, TimeUnit.MINUTES);
     }
+
     public void operate(){
         dbHandler.startSession();
         dbHandler.startTransaction();
@@ -133,6 +122,20 @@ public class DataOperator {
         {
             dbHandler.save(ch);
         });
+    }
+
+    public DataParser getDataParser() {
+        return dataParser;
+    }
+
+    public DataCrawler getDataCrawler() {
+
+        return dataCrawler;
+    }
+
+    public DBHandler getDbHandler() {
+
+        return dbHandler;
     }
 
     private ArrayList<String> getCrawledGamesData() {
