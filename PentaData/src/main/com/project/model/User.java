@@ -21,6 +21,14 @@ public class User {
     @GenericGenerator(name = "increment", strategy = "increment")
     private int userID;
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     @NaturalId
     private String userName;
     private String nickName;
@@ -38,12 +46,21 @@ public class User {
     private ArrayList<Channel> subscribedChannels;
     private ArrayList<Channel> historyChannels;
 
+    public User(){
 
-    public User(String nickName, String userName, String email, String password) {
+    }
+
+    public User(String nickName, String email, String password) {
         this.nickName = nickName;
-        this.userName = userName;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String nickName, String email, String password, Date geburtstag) {
+        this.nickName = nickName;
+        this.email = email;
+        this.password = password;
+        this.geburtstag = geburtstag;
     }
 
     public int getUserID() {

@@ -9,9 +9,9 @@ import java.util.Date;
  * Created by arash on 08.09.2015.
  */
 public interface UserService {
-    User newUser(String nickName, String userName, String email, String password);
+    void register(String nickname, String password, String email, Date date);
 
-    void deleteAccount(User user);
+    void deleteAccount(String userName);
 
     User getUser(String userName);
 

@@ -2,12 +2,12 @@ package com.project.database;
 
 import com.project.model.Channel;
 import com.project.model.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by arash on 08.09.2015.
@@ -23,13 +23,39 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public User newUser(String nickName, String userName, String email, String password) {
-        User user = new User(nickName, userName, email, password);
-        return user;
+    public void register(String nickname, String password, String email, Date date){
+        User user = new User(nickname, password, email, date);
+        String username = "";
+
+        int usersize = getNickAmount(nickname);
+        boolean available = true;
+
+        if(usersize < 10000){
+            int randomInt = (int) (Math.random() * 8999) + 1000;
+            while(available){
+                username = nickname + "~" + randomInt;
+                available = checkIfUserExits(username);
+            }
+        }
+        else{
+            int randomInt = (int) (Math.random() * 19999) + 10000;
+            while(available){
+                username = nickname + "~" + randomInt;
+                available = checkIfUserExits(username);
+            }
+        }
+
+        user.setUserName(username);
+        transaction = session.beginTransaction();
+        session.save(user);
+        transaction.commit();
     }
 
-    public void deleteAccount(User user) {
-
+    public void deleteAccount(String userName) {
+        transaction = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("DELETE FROM user WHERE userName=" + userName);
+        query.executeUpdate();
+        transaction.commit();
     }
 
 
@@ -50,7 +76,11 @@ public class UserServiceImpl implements UserService {
 
 
     public void setEmail(String username, String email) {
-        //user.setEmail(email);
+        transaction = session.beginTransaction();
+        User user = getUser(username);
+        user.setEmail(email);
+        session.save(user);
+        transaction.commit();
     }
 
     public void uploadPicture(User user, String picLink) {
@@ -90,5 +120,20 @@ public class UserServiceImpl implements UserService {
 
     public boolean available(User user) {
         return false;
+    }
+
+
+    private int getNickAmount(String nickname){
+        List<User> userList = new ArrayList<User>();
+        Criteria crit = session.createCriteria(User.class).add(Restrictions.like("nickName", nickname));
+        userList = crit.list();
+        return userList.size();
+    }
+
+    private boolean checkIfUserExits(String username){
+        List<User> userList = new ArrayList<User>();
+        Criteria crit = session.createCriteria(User.class).add(Restrictions.like("userName", username));
+        userList = crit.list();
+        return userList.size() > 0;
     }
 }
