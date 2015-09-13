@@ -35,11 +35,7 @@ public class DataCrawlerImpl implements DataCrawler {
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL : " + url);
         System.out.println("Response Code : " + responseCode);
-        if (responseCode == 200) {
-            _responseCheck = true;
-        } else {
-            _responseCheck = false;
-        }
+        _responseCheck = responseCode == 200;
         try {
 
             BufferedReader in = new BufferedReader(
