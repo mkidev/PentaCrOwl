@@ -19,7 +19,7 @@ public interface UserService {
 
     User getName(String name);
 
-    void setEmail(User user, String email);
+    void setEmail(String username, String email);
 
     void uploadPicture(User user, String picLink);
 

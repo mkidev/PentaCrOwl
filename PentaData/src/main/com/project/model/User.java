@@ -33,6 +33,7 @@ public class User {
     private Date geburtstag;
     private String picture;
 
+    // TODO @ManyToMany
     private ArrayList<Channel> followedChannels;
     private ArrayList<Channel> subscribedChannels;
     private ArrayList<Channel> historyChannels;
