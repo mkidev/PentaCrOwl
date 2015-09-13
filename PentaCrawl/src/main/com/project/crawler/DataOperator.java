@@ -1,14 +1,16 @@
 package com.project.crawler;
 
+import com.project.database.*;
 import com.project.database.util.HibernateUtil;
-import com.project.database.DBHandler;
-import com.project.database.DBHandlerImpl;
 import com.project.model.Channel;
 import com.project.model.Game;
 import com.project.model.Stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Marcel Kisilowski on 06.09.15.
@@ -18,6 +20,9 @@ public class DataOperator {
     private static DataParser dataParser;
     private static DBHandler dbHandler;
     private ArrayList<String> crawledGamesData = new ArrayList<>();
+
+    private static GameService gameService;
+    private static UserService userService;
 
     public DataParser getDataParser() {
         return dataParser;
@@ -35,26 +40,45 @@ public class DataOperator {
         dataCrawler = new DataCrawlerImpl();
         dataParser = new DataParserImpl(dataCrawler);
         dbHandler = new DBHandlerImpl(HibernateUtil.getSessionFactory());
+
+        gameService = new GameServiceImpl(HibernateUtil.getSessionFactory());
+        userService = new UserServiceImpl(HibernateUtil.getSessionFactory());
     }
 
     public static void main(String[] args) {
         DataOperator dataOperator = new DataOperator();
+
+        final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                dataOperator.operate();
+            }
+        }, 0, 5, TimeUnit.MINUTES);
+    }
+    public void operate(){
         dbHandler.startSession();
         dbHandler.startTransaction();
-        dataOperator.saveGames();
+        saveGames();
         dbHandler.commit();
         dbHandler.closeSession();
+
+        /*
         dbHandler.startSession();
         dbHandler.startTransaction();
-        dataOperator.saveStream();
+        saveStream();
         dbHandler.commit();
         dbHandler.closeSession();
-       /*  dbHandler.startSession();
+
+        dbHandler.startSession();
         dbHandler.startTransaction();
-        dataOperator.saveChannel();
+        saveChannel();
         dbHandler.commit();
-        dbHandler.closeSession();*/
-        dbHandler.close();
+        dbHandler.closeSession();
+        */
+
+        // TODO
+        // dbHandler.close();
     }
 
     public void saveGames() {

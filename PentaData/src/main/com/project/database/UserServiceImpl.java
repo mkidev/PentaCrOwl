@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public void setEmail(User user, String email) {
-        user.setEmail(email);
+    public void setEmail(String username, String email) {
+        //user.setEmail(email);
     }
 
     public void uploadPicture(User user, String picLink) {
