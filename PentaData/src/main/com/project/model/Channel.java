@@ -2,10 +2,7 @@ package com.project.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by arash on 07.09.2015.
@@ -21,6 +18,8 @@ public class Channel {
     private int follower;
     private String source;
     private int views;
+    @OneToOne(mappedBy = "streamID")
+    private Stream stream;
 
     public Channel() {
     }
@@ -73,4 +72,11 @@ public class Channel {
     }
 
 
+    public Stream getStream() {
+        return stream;
+    }
+
+    public void setStream(Stream stream) {
+        this.stream = stream;
+    }
 }

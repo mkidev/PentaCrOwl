@@ -1,5 +1,6 @@
 package com.project.model;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;

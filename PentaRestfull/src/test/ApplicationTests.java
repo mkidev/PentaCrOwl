@@ -1,6 +1,6 @@
 package test;
 
-import main.com.project.restServer.Application;
+import com.project.restServer.ResourceApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = ResourceApplication.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
 public class ApplicationTests {

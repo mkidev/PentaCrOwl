@@ -1,4 +1,4 @@
-package com.project.restServer;
+package com.project.webui;
 
 /**
  * Created by Marcel Kisilowski on 09.09.15.

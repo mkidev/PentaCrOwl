@@ -1,4 +1,4 @@
-package com.project.restServer;
+package com.project.webui;
 
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;

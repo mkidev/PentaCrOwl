@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * Created by Marcel Kisilowski on 08.09.15.
  */
-@RestController
 public class StreamController {
     StreamService service = new StreamServiceImpl(HibernateUtil.getSessionFactory());
 

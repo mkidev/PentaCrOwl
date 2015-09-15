@@ -1,7 +1,10 @@
 package com.project.model;
 
+import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +22,7 @@ public class User {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int userID;
+    private long userID;
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -30,9 +33,13 @@ public class User {
     }
 
     @NaturalId
+    @NotEmpty
     private String userName;
     private String nickName;
+    @NotEmpty
+    @Email
     private String email;
+    @NotEmpty
     private String password;
 
     private String name;
@@ -46,9 +53,7 @@ public class User {
     private ArrayList<Channel> subscribedChannels;
     private ArrayList<Channel> historyChannels;
 
-    public User(){
-
-    }
+    User(){}
 
     public User(String nickName, String email, String password) {
         this.nickName = nickName;
@@ -63,7 +68,7 @@ public class User {
         this.geburtstag = geburtstag;
     }
 
-    public int getUserID() {
+    public long getUserID() {
         return userID;
     }
 

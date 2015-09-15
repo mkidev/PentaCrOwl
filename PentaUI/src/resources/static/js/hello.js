@@ -73,7 +73,15 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
         }
 
     }).controller('home', function($scope, $http) {
-        $http.get('localhost:9000/games/top').success(function(data) {
-            $scope.greeting = data;
-        })
+        $http.get('token').success(function(token) {
+            $http({
+                url : 'http://localhost:9000',
+                method : 'GET',
+                headers : {
+                    'X-Auth-Token' : token.token
+                }
+            }).success(function(data) {
+                $scope.greeting = data;
+            });
+        });
     });

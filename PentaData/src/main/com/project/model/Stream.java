@@ -2,10 +2,7 @@ package com.project.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -17,9 +14,10 @@ public class Stream {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int id;
+    private int streamID;
     private String source;
-    private String channel;
+    @OneToOne(mappedBy = "channelID")
+    private Channel channel;
     private String game;
     private int viewers;
     private Date createdAt;
@@ -29,7 +27,7 @@ public class Stream {
     public Stream() {
     }
 
-    public Stream(String source, String channel, String game, int viewers, Date createdAt, String previewPicture) {
+    public Stream(String source, Channel channel, String game, int viewers, Date createdAt, String previewPicture) {
         this.source = source;
         this.channel = channel;
         this.game = game;
@@ -38,8 +36,8 @@ public class Stream {
         this.previewPicture = previewPicture;
     }
 
-    public int getId() {
-        return id;
+    public int getStreamID() {
+        return streamID;
     }
 
     public String getSource() {
@@ -50,7 +48,7 @@ public class Stream {
         this.source = source;
     }
 
-    public String getChannel() {
+    public Channel getChannel() {
         return channel;
     }
 
