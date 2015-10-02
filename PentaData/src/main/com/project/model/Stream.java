@@ -16,7 +16,7 @@ public class Stream {
     @GenericGenerator(name = "increment", strategy = "increment")
     private int streamID;
     private String source;
-    @OneToOne(mappedBy = "channelID")
+    @OneToOne
     private Channel channel;
     private String game;
     private int viewers;

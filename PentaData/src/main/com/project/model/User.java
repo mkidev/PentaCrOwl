@@ -33,7 +33,6 @@ public class User {
     }
 
     @NaturalId
-    @NotEmpty
     private String userName;
     private String nickName;
     @NotEmpty
@@ -55,8 +54,8 @@ public class User {
 
     User(){}
 
-    public User(String nickName, String email, String password) {
-        this.nickName = nickName;
+    public User(String userName, String email, String password) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
     }

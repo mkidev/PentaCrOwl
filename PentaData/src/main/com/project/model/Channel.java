@@ -18,7 +18,7 @@ public class Channel {
     private int follower;
     private String source;
     private int views;
-    @OneToOne(mappedBy = "streamID")
+    @OneToOne
     private Stream stream;
 
     public Channel() {

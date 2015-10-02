@@ -4,6 +4,7 @@ import com.project.model.Game;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +17,7 @@ import java.util.Optional;
  * Created by Marcel Kisilowski on 08.09.15.
  */
 @RepositoryRestResource(collectionResourceRel = "games", path = "games")
-public interface GameRepository extends ReadOnlyRepository<Game> {
+public interface GameRepository extends CrudRepository<Game,Long> {
     Game findByName(@Param("name") String name);
     List<Game> findByNameLike(@Param("name") String name);
     Page<Game> findAllByOrderByViewersDesc(Pageable pageable);
